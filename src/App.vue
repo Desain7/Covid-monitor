@@ -23,7 +23,8 @@ export default {
       todos:[
         {id:'001', title:'上课', isChecked:true},
         {id:'002', title:'吃饭', isChecked:false},
-        {id:'003', title:'学习', isChecked:false}
+        {id:'003', title:'学习', isChecked:false},
+        {id:'003', title:'学习', isChecked:false},
       ]
     }
   },
