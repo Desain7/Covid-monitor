@@ -1,4 +1,4 @@
-# Covid
+# Covid-monitor
 
 ## Project setup
 ```
@@ -19,3 +19,5 @@ npm run build
 ```
 npm run lint
 ```
+zhang
+ye
