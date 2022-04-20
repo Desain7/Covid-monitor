@@ -1,15 +1,20 @@
 <template>
-  <div id="container">
-    <IsSerach></IsSerach>
-    <IsList></IsList>
+  <div>
+  <el-container>
+    <index></index>
+    
+  </el-container>
+  <!-- <chinaConfirmLine></chinaConfirmLine> -->
+  <chinaMap></chinaMap>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 
-import IsList from './components/List.vue'
-import IsSerach from './components/Serach.vue'
-
+import index from './components/index.vue'
+// import chinaConfirmLine from './components/china-confirm-line.vue'
+import chinaMap from './components/china-map.vue'
 
 export default {
   name:'App',
@@ -19,14 +24,29 @@ export default {
     }
   },
   methods: {
-
+    isOK(){
+      console.log('ok')
+    }
   },
   components:{
-    IsSerach,
-    IsList
+    index,
+    // chinaConfirmLine,
+    chinaMap
     
   },
-  props:['IsList','IsSerach']
+  created(){
+
+    axios.get('http://localhost:8080/covid-data/list-total').then(
+          response => {
+						console.log('成功获取数据')
+						this.$store.state.covidData = response.data
+            console.log(response.data)
+					},
+          error => {
+						console.log('请求失败',error.message)
+					}
+    )
+  },
 }
 </script>
 
