@@ -5,6 +5,7 @@
     
   </el-container>
   <!-- <chinaConfirmLine></chinaConfirmLine> -->
+  <showNews></showNews>
   <chinaMap></chinaMap>
   </div>
 </template>
@@ -15,6 +16,7 @@ import axios from 'axios'
 import index from './components/index.vue'
 // import chinaConfirmLine from './components/china-confirm-line.vue'
 import chinaMap from './components/china-map.vue'
+import showNews from './components/showNews.vue';
 
 export default {
   name:'App',
@@ -31,7 +33,8 @@ export default {
   components:{
     index,
     // chinaConfirmLine,
-    chinaMap
+    chinaMap,
+    showNews,
     
   },
   created(){
