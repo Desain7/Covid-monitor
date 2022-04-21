@@ -40,7 +40,6 @@ export default {
                     ],
                     visualMap: {
                     min: 0,
-                    max: 300,
                     inRange: {
                         color: ['white', 'red'] // 控制颜色渐变的范围
                     },
