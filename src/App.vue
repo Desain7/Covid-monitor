@@ -4,9 +4,12 @@
     <index></index>
     
   </el-container>
-  <!-- <chinaConfirmLine></chinaConfirmLine> -->
-  <showNews></showNews>
+    <showNews></showNews>
+    <provinceConfirm></provinceConfirm>
+    <chinaConfirmLine></chinaConfirmLine>
+ 
   <chinaMap></chinaMap>
+    <jiangxi></jiangxi>
   </div>
 </template>
 
@@ -14,9 +17,11 @@
 import axios from 'axios'
 
 import index from './components/index.vue'
-// import chinaConfirmLine from './components/china-confirm-line.vue'
+import chinaConfirmLine from './components/china-confirm-line.vue'
 import chinaMap from './components/china-map.vue'
 import showNews from './components/showNews.vue';
+import jiangxi from './components/province/jiangxi.vue';
+import provinceConfirm from './components/province-confirm.vue';
 
 export default {
   name:'App',
@@ -32,13 +37,14 @@ export default {
   },
   components:{
     index,
-    // chinaConfirmLine,
+    chinaConfirmLine,
     chinaMap,
     showNews,
+    jiangxi,
+    provinceConfirm,
     
   },
   created(){
-
     axios.get('http://localhost:8080/covid-data/list-total').then(
           response => {
 						console.log('成功获取数据')
@@ -56,5 +62,8 @@ export default {
 <style scoped>
   #container{
     margin-left: 10%;
+  }
+  .body{
+    background-color: black;
   }
 </style>

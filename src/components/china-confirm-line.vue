@@ -1,5 +1,5 @@
 <template>
-    <div class="main" style="width: 500px;height: 500px; display: block;"></div>
+    <div class="confirmLine" style="width: 500px;height: 500px; display: block;"></div>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
     methods: {
         async drawChart() {
             console.log(this.$store.getters.date)
-            let myChart = echarts.init(document.querySelector('.main'));
+            let myChart = echarts.init(document.querySelector('.confirmLine'));
             let option = {
                 title:{
                     show:true,
@@ -77,9 +77,9 @@ export default {
                     x2: 0,
                     y2: 1,
                     colorStops: [{
-                        offset: 0, color: 'red' // 0% 处的颜色
+                        offset: 0, color: 'rgb(255,128,128)' // 0% 处的颜色
                     }, {
-                        offset: 1, color: 'orange' // 100% 处的颜色
+                        offset: 1, color: 'rgb(255,0,0)' // 100% 处的颜色
                     }],
                     global: false // 缺省为 false
                 }

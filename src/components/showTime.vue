@@ -56,6 +56,7 @@ export default {
 <style>
 
   .time{
+    float: right;
     display:flex;
     font-size: 20px;
     font-weight: 500;
