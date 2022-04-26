@@ -3,23 +3,31 @@
 </template>
 
 <script>
-import * as echarts from 'echarts';
 import axios from 'axios';
 
 export default {
     name: 'chinaMap',
     data() {
         return {
-            
+            chartInstance:null,
+
         }
     },
+    mounted() {
+        this.initChart()
+        this.getData()
+        window.addEventListener('resize', this.screenAdapter)
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.screenAdapter)
+    },
     methods: {
-        drawMap(){
-            let mCharts = echarts.init(document.querySelector(".chinaMap"))
+        initChart(){
+            this.chartInstance = this.$echarts.init(document.querySelector(".chinaMap"))
             axios.get('http://localhost:5000/api/static/map/china').then(
                 response => {
                 let ret = response.data
-                echarts.registerMap('chinaMap', ret)
+                this.$echarts.registerMap('chinaMap', ret)
                 let option = {
                     geo: {
                     type: 'map',
@@ -67,21 +75,37 @@ export default {
                         formatter: '{b}<br/>新增确诊人数：{c}'
                     },
                     select:false,
+                    timeline: {
+                                // bottom: '6%',
+                                label:{
+                                    rotate:45,
+                                },
+                                data:[  '2020-01', '2020-02', '2020-03', '2020-04','2020-05', '2020-06',
+                                        '2020-07', '2020-08','2020-09', '2020-10','2020-11', '2020-12',
+                                        '2021-01', '2021-02', '2021-03', '2021-04','2021-05', '2021-06',
+                                        '2021-07', '2021-08','2021-09', '2021-10','2021-11', '2021-12',
+                                        '2022-01', '2022-02', '2022-03', '2022-04','2022-05',
+                                    ],
+                            },
                 }
-                mCharts.setOption(option)
+                this.chartInstance.setOption(option)
                 },
                 error=>{
                     console.log('请求失败！',error.message)
                 }
             )
-        }
+        },
+        getData() {
+
+        },
+        updateChart() {
+
+        },
+        screenAdapter() {
+
+        },
     },
-    mounted() {
-        setTimeout(() => {
-            this.drawMap()
-            console.log(this.$store.getters.chinaProvince)
-        }, 1000);
-    },
+
     
 }
 

@@ -1,27 +1,14 @@
 <template>
   <div>
-  <el-container>
     <index></index>
-    
-  </el-container>
-    <showNews></showNews>
-    <provinceConfirm></provinceConfirm>
-    <chinaConfirmLine></chinaConfirmLine>
- 
-  <chinaMap></chinaMap>
-    <jiangxi></jiangxi>
+    <!-- <china></china> -->
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 
 import index from './components/index.vue'
-import chinaConfirmLine from './components/china-confirm-line.vue'
-import chinaMap from './components/china-map.vue'
-import showNews from './components/showNews.vue';
-import jiangxi from './components/province/jiangxi.vue';
-import provinceConfirm from './components/province-confirm.vue';
+// import china from './pages/china.vue'
 
 export default {
   name:'App',
@@ -31,39 +18,14 @@ export default {
     }
   },
   methods: {
-    isOK(){
-      console.log('ok')
-    }
   },
   components:{
     index,
-    chinaConfirmLine,
-    chinaMap,
-    showNews,
-    jiangxi,
-    provinceConfirm,
-    
-  },
-  created(){
-    axios.get('http://localhost:8080/covid-data/list-total').then(
-          response => {
-						console.log('成功获取数据')
-						this.$store.state.covidData = response.data
-            console.log(response.data)
-					},
-          error => {
-						console.log('请求失败',error.message)
-					}
-    )
+    // china,
   },
 }
 </script>
 
 <style scoped>
-  #container{
-    margin-left: 10%;
-  }
-  .body{
-    background-color: black;
-  }
+
 </style>

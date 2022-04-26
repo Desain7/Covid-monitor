@@ -1,7 +1,5 @@
 <template>
-  <div>
     <div class="time">{{time}}</div>
-  </div>
 </template>
  
 <script>
@@ -57,7 +55,7 @@ export default {
 
   .time{
     float: right;
-    display:flex;
+    display:inline-flex;
     font-size: 20px;
     font-weight: 500;
     color: #303133;

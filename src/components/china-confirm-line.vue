@@ -1,26 +1,42 @@
 <template>
-    <div class="confirmLine" style="width: 500px;height: 500px; display: block;"></div>
+    <div class="confirmLine" style="width: 500px;height: 500px; display: inline-block;" ref="chinaConfirmLine"></div>
 </template>
 
 <script>
-import * as echarts from 'echarts';
+import axios from 'axios';
 
 export default {
     data() {
         return {
-            
+            chartInstance:null,
+            date:[],
+            confirm:[],
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.drawChart()
-        }, 1000);
+        this.initChart()
+        this.getData()
+        window.addEventListener('resize', this.screenAdapter)
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.screenAdapter)
     },
     methods: {
-        async drawChart() {
-            console.log(this.$store.getters.date)
-            let myChart = echarts.init(document.querySelector('.confirmLine'));
-            let option = {
+        async getData(){
+            await axios.get('http://localhost:8080/covid-data/list-total').then(
+                response =>{
+                    console.log('1111',response.data);
+                    response.data.data.chinaDayList.forEach(item => {
+                        this.date.push(item.date);
+                        this.confirm.push(item.today.confirm);
+                    });
+                }
+            )
+            this.updateChart()
+        },
+        initChart() {
+            this.chartInstance = this.$echarts.init(document.querySelector('.confirmLine'));
+            let initOption = {
                 title:{
                     show:true,
                     text:'全国新增确诊人数'
@@ -28,17 +44,20 @@ export default {
                 },
                 xAxis: {
                 type: 'category',
-                data: this.$store.getters.date
+                axisLabel: {
+                    color: '#333',
+                    rotate: -45,
+                    interval: 2,
+                }
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [
                     {
-                    data: this.$store.getters.confirm,
                     type: 'line'
                     }
-                ],
+                ], 
                 dataZoom: [
                     {
                     type: 'slider',
@@ -84,14 +103,60 @@ export default {
                     global: false // 缺省为 false
                 }
             };
-            option && myChart.setOption(option);
-    
-        }
+           this.chartInstance.setOption(initOption);
+        },
+        updateChart() {
+            const dataOption = {
+                xAxis: {
+                type: 'category',
+                data: this.date,
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                    data: this.confirm,
+                    }
+                ], 
+            }
+            this.chartInstance.setOption(dataOption);
+        },
+        screenAdapter () {
+            this.titleFontSize = this.$refs.chinaConfirmLine.offsetWidth / 100 * 3.6
+            const adapterOption = {
+                title: {
+                textStyle: {
+                    fontSize: this.titleFontSize
+                }
+                },
+                legend: {
+                itemWidth: this.titleFontSize,
+                itemHeight: this.titleFontSize,
+                itemGap: this.titleFontSize / 2,
+                textStyle: {
+                    fontSize: this.titleFontSize / 2
+                }
+                },
+                series: [
+                {
+                    radius: this.titleFontSize * 4.5,
+                    center: ['50%', '60%']
+                }
+                ]
+            }
+            this.chartInstance.setOption(adapterOption)
+            this.chartInstance.resize()
+            },
+
     }
 }
 
 </script>
 
 <style>
+.confirmLine{
+    display: inline-block;
+}
 
 </style>

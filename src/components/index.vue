@@ -1,7 +1,19 @@
 <template>
-    <el-header>
+    <div class="index">
+        <div class="locationChange">
+            <div class="china" >
+                <router-link to="/china">
+                    <span>中国</span>
+                </router-link>
+            </div>
+            
+            <div class="oversea">
+                    <span>世界</span>
+            </div>
+        </div>
         <timer></timer>
-    </el-header>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -11,13 +23,13 @@ export default {
     name:'my-header',
 
     components:{
-        timer
+        timer,
     },
 }
 </script>
 
-<style>
-    .el-header{
+<style scoped>
+    .index{
         background-color: #f5f7fa;
         padding: 0;
         height: 60px;
@@ -26,7 +38,16 @@ export default {
         font-size: 18px;
         font-weight: 500;
         border-bottom: 1px solid #ebeef5;
-        width: 100%;
+    }
+    .locationChange{
+        display: inline-flex;
+        width: 120px;
+    }
+    .china{
+        display: inline-block;
+    }
+    .oversea{
+        display: inline-block;
     }
     
 </style>

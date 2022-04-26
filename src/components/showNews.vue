@@ -24,10 +24,10 @@ export default {
     },
     methods:{
         getNews(){
-            axios.get('https://lab.isaaclin.cn/nCoV/api/news?page=1&num=10').then(
+            axios.get('http://api.tianapi.com/txapi/ncov/index?key=964dc226dd5b57e892e6199735b6c55f').then(
                 response=>{
                     console.log('getNews',response.data)
-                    response.data.results.forEach(item=>{
+                    response.data.newslist[0].news.forEach(item=>{
                         this.newsData.push({
                             title:item.summary,
                             url:item.sourceUrl,

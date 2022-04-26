@@ -1,5 +1,5 @@
 <template>
-    <div class="provinceConfirm" style="width: 500px;height: 500px; display: block;"></div>
+    <div class="provinceConfirm" style="width: 500px;height: 500px; display: inline-block;" ref="provinceConfirm"></div>
 </template>
 
 <script>
@@ -15,10 +15,13 @@ export default {
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.getData()
-            this.initChart()
-        }, 1000);
+        this.initChart()
+        this.getData()
+        window.addEventListener('resize', this.screenAdapter)
+    },
+    destroyed() {
+        clearInterval(this.timerId)
+        window.removeEventListener('resize', this.screenAdapter)
     },
     methods: {
         // 初始化echartInstance对象
@@ -45,7 +48,6 @@ export default {
             type: 'category',
             axisLabel: {
             color: '#333',
-            //  让x轴文字方向为竖向
             interval: 0,
             }
             },
@@ -96,31 +98,25 @@ export default {
             this.startInterval()
         })
         },
-        // 获取服务器的数据
-        getData () {
-        // http://127.0.0.1:8888/api/seller
-        this.$http.get('http://localhost:8080/covid-data/list-total').then(
-            response =>{
-                this.allData = response.data.data.areaTree[2].children
-                this.currentPage = 1
-                console.log('446',this.allData)
-            },
-
-        ).then( () => {
-            this.allData.sort((a, b) => {
-                return a.total.confirm - b.total.confirm // 从小到大的排序
-            })
-            console.log('123',this.allData)
-            this.totalPage = this.allData.length % 10 === 0 ? this.allData.length / 10 : this.allData.length / 10 + 1
-            this.updateChart()
-            }
-        )
-        // 对数据排序
-        
-        // 每5个元素显示一页
-
-        // 启动定时器
-        this.startInterval()
+        async getData() {
+            // if (!this.getLocalData('china')) {
+            //初次请求数据
+                await this.$http.get('http://111.231.75.86:8000/api/provinces/CHN/').then(
+                    response => {
+                    this.allData = response.data; // 使用数据
+                    // this.setLocalData('china'); // 缓存数据
+                    console.log('new api',this.allData);
+                }).then( () => {
+                    this.allData.sort((a, b) => {
+                        return a.confirmedCount - b.confirmedCount // 从小到大的排序
+                    })
+                    console.log('123',this.allData)
+                    this.totalPage = this.allData.length % 10 === 0 ? this.allData.length / 10 : this.allData.length / 10 + 1
+                    this.updateChart()
+                    }
+                )
+            // }
+            this.startInterval()
         },
         // 更新图表
         updateChart () {
@@ -128,10 +124,10 @@ export default {
         const end = this.currentPage * 10
         const showData = this.allData.slice(start, end)
         const province = showData.map((item) => {
-            return item.name
+            return item.provinceName
         })
         const confirm = showData.map((item) => {
-            return item.total.confirm
+            return item.confirmedCount
         })
         const dataOption = {
             xAxis: {
@@ -157,11 +153,36 @@ export default {
             this.updateChart()
         }, 3000)
         },
+        screenAdapter () {
+            this.titleFontSize = this.$refs.provinceConfirm.offsetWidth / 100 * 3.6
+            const adapterOption = {
+                title: {
+                textStyle: {
+                    fontSize: this.titleFontSize
+                }
+                },
+                legend: {
+                itemWidth: this.titleFontSize,
+                itemHeight: this.titleFontSize,
+                itemGap: this.titleFontSize / 2,
+                textStyle: {
+                    fontSize: this.titleFontSize / 2
+                }
+                },
+                series: [
+                {
+                    radius: this.titleFontSize * 4.5,
+                    center: ['50%', '60%']
+                }
+                ]
+            }
+            this.chartInstance.setOption(adapterOption)
+            this.chartInstance.resize()
+            },
     }
 }
 
 </script>
 
-<style>
-
+<style scoped>
 </style>
