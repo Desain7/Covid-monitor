@@ -4,6 +4,7 @@
 
 <script>
 import axios from 'axios';
+import theme from '../../assets/confirm.json';
 
 export default {
     data() {
@@ -11,6 +12,9 @@ export default {
             chartInstance:null,
             date:[],
             confirm:[],
+            heal:[],
+            dead:[],
+            input:[],
         }
     },
     mounted() {
@@ -22,20 +26,9 @@ export default {
         window.removeEventListener('resize', this.screenAdapter)
     },
     methods: {
-        async getData(){
-            await axios.get('http://localhost:8080/covid-data/list-total').then(
-                response =>{
-                    console.log('1111',response.data);
-                    response.data.data.chinaDayList.forEach(item => {
-                        this.date.push(item.date);
-                        this.confirm.push(item.today.confirm);
-                    });
-                }
-            )
-            this.updateChart()
-        },
         initChart() {
-            this.chartInstance = this.$echarts.init(document.querySelector('.confirmLine'));
+            this.$echarts.registerTheme("theme", theme);
+            this.chartInstance = this.$echarts.init(document.querySelector('.confirmLine'), 'theme');
             let initOption = {
                 title:{
                     show:true,
@@ -53,6 +46,9 @@ export default {
                 yAxis: {
                     type: 'value'
                 },
+                legend: {
+                    data: ['新增确诊', '新增境外输入']
+                },
                 series: [
                     {
                     type: 'line'
@@ -60,27 +56,27 @@ export default {
                 ], 
                 dataZoom: [
                     {
-                    type: 'slider',
-                    show: true,
-                    start: 50,
-                    end: 100,
-                    handleSize: 8
+                        type: 'slider',
+                        show: true,
+                        start: 50,
+                        end: 100,
+                        handleSize: 8
                     },
                     {
-                    type: 'inside',
-                    start: 50,
-                    end: 100
+                        type: 'inside',
+                        start: 50,
+                        end: 100
                     },
                     {
-                    type: 'slider',
-                    show: true,
-                    yAxisIndex: 0,
-                    filterMode: 'empty',
-                    width: 12,
-                    height: '70%',
-                    handleSize: 8,
-                    showDataShadow: false,
-                    left: '93%'
+                        type: 'slider',
+                        show: true,
+                        yAxisIndex: 0,
+                        filterMode: 'empty',
+                        width: 12,
+                        height: '70%',
+                        handleSize: 8,
+                        showDataShadow: false,
+                        left: '93%'
                     }
                 ],
                 tooltip: {
@@ -105,6 +101,19 @@ export default {
             };
            this.chartInstance.setOption(initOption);
         },
+        async getData(){
+            await axios.get('http://localhost:8080/covid-data/list-total').then(
+                response =>{
+                    console.log('1111',response.data);
+                    response.data.data.chinaDayList.forEach(item => {
+                        this.date.push(item.date);
+                        this.confirm.push(item.today.confirm);
+                        this.input.push(item.today.input);
+                    });
+                }
+            )
+            this.updateChart()
+        },
         updateChart() {
             const dataOption = {
                 xAxis: {
@@ -114,9 +123,24 @@ export default {
                 yAxis: {
                     type: 'value'
                 },
-                series: [
+                series:[
                     {
+                    name: '新增确诊',
+                    type: 'line',
+                    emphasis: {
+                        focus: 'series'
+                    },
                     data: this.confirm,
+                    color: 'rgb(255,128,128)'
+                    },
+                    {
+                    name: '新增境外输入',
+                    type: 'line',
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: this.input,
+                    color: 'rgb(71,109,160)'
                     }
                 ], 
             }

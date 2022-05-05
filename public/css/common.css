@@ -1,0 +1,177 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+/* CSS Document */
+::-webkit-scrollbar-track{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);}/*滚动条的滑轨背景颜色*/
+::-webkit-scrollbar-thumb{background-color: rgba(0,0,0,0.05);border-radius: 10px;-webkit-box-shadow: inset 1px 1px 0 rgba(75, 75, 75, 0.58);}/*滑块颜色*/
+::-webkit-scrollbar-thumb{background-color: rgba(0,0,0,0.2);border-radius: 10px;-webkit-box-shadow: inset 1px 1px 0 rgba(48, 48, 48, 0.92);}
+::-webkit-scrollbar{width: 16px;height: 16px;}/* 滑块整体设置*/
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb{border-radius: 999px;border: 5px solid transparent;}
+::-webkit-scrollbar-track{box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;}
+::-webkit-scrollbar-thumb{min-height: 20px;background-clip: content-box;box-shadow: 0 0 0 5px rgba(255,255,255,.5) inset;}
+::-webkit-scrollbar-corner{background: transparent;}/* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+
+body{
+    background-color: rgb(6,20,54);
+}
+a:hover{
+    text-decoration: none;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.clear{
+    clear: both;
+}
+
+.text_right{
+    text-align: right;
+}
+.header{
+    width: 100%;
+    height: 80px;
+    background-color: #030829;
+
+}
+.header_center{
+    width: 30%;
+    margin: 0px auto;
+    color: #FFFFff;
+    text-align: center;
+    height: 80px;
+    background-image: url("../img/logoBg.png");
+    background-size: 100% 100%;
+    font-family: "微软雅黑"!important;
+}
+.header_center h2{
+   margin-top: 16px !important;
+   font-size: 22px !important;
+
+}
+.color_font{
+    color: #e8f7fe !important;
+    font-size: 12px !important;
+}
+.header_logo{
+    margin-left: 1%;
+    margin-top: 12px;
+
+}
+.header_logo img{
+    height: 56px;
+}
+.nav{
+
+    width: 35%;
+}
+.nav>ul{
+
+}
+.nav>ul>li{
+    display: inline-block;
+    width: 120px;
+    text-align: center;
+    height: 50px;
+    position: relative;
+    line-height: 50px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    /*box-shadow: -5px 0px 5px #034c6a inset, !*å·¦è¾¹é˜´å½±*!*/
+    /*0px -5px 15px #034c6a inset, !*ä¸Šè¾¹é˜´å½±*!*/
+    /*5px 0px 15px #034c6a inset, !*å³è¾¹é˜´å½±*!*/
+    /*0px 5px 15px #034c6a inset;*/
+
+
+    border-radius: 5px;
+
+}
+.nav>ul>li:hover{
+    box-shadow: -10px 0px 15px #034c6a inset, /*å·¦è¾¹é˜´å½±*/
+    0px -10px 15px #034c6a inset, /*ä¸Šè¾¹é˜´å½±*/
+    10px 0px 15px #034c6a inset, /*å³è¾¹é˜´å½±*/
+    0px 10px 15px #034c6a inset;
+
+    box-sizing: border-box;
+}
+.nav>ul>li i{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top:3px;
+    margin-right: 5px;
+}
+.nav>ul>li>a{
+    color: #ffffff;
+    /*display: inline-block;*/
+    /*padding: 0 15px 0 5px;*/
+    font-size: 14px;
+}
+/*.nav>ul>li:hover .li_ul{*/
+    /*display: block;*/
+/*}*/
+
+.li_ul{
+    position: absolute;
+    background-color: #030829;
+    width: 100%;
+    /*border-top:4px solid #4b8df8;*/
+    display: none;
+    z-index: 999;
+
+}
+.li_ul li{
+    line-height: 40px !important;
+}
+.li_ul li:hover{
+    background-color: #4b8df8;
+}
+.li_ul li a{
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.nav_1{
+     background: url("../img/nav_1.png");
+ }
+.nav_2{
+    background-image: url("../img/nav_2.png");
+}
+.nav_3{
+    background-image: url("../img/nav_3.png");
+
+}
+.nav_4{
+    background-image: url("../img/nav_4.png");
+}
+.nav_5{
+    background-image: url("../img/nav_5.png");
+}
+.nav_6{
+    background-image: url("../img/nav_6.png");
+}
+.nav_7{
+    background-image: url("../img/nav_7.png");
+}
+.nav_8{
+    background-image: url("../img/nav_9.png");
+}
+.nav_active{
+    border-bottom: 4px solid #4b8df8;
+    box-shadow: -10px 0px 15px #034c6a inset, /*å·¦è¾¹é˜´å½±*/
+    0px -10px 15px #034c6a inset, /*ä¸Šè¾¹é˜´å½±*/
+    10px 0px 15px #034c6a inset, /*å³è¾¹é˜´å½±*/
+    0px 10px 15px #034c6a inset;
+
+    box-sizing: border-box;
+}
+

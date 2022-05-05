@@ -2,6 +2,8 @@
 import VueRouter from 'vue-router'
 //引入路由组件
 import china from '../pages/china'
+import oversea from '../pages/oversea'
+import vaccine from '../pages/vaccine'
 
 //创建router实例对象，去管理一组一组的路由规则
 const router = new VueRouter({
@@ -9,6 +11,14 @@ const router = new VueRouter({
 		{
 			path:'/china',
 			component:china
+		},
+		{
+			path:'/oversea',
+			component:oversea
+		},
+		{
+			path:'/vaccine',
+			component:vaccine
 		},
 
 	]

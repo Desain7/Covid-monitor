@@ -11,6 +11,16 @@ module.exports = {
          changeOrigin: true,
          pathRewrite: {'^/covid-data': ''}
        },
+       '/privince-data': {// 匹配所有以 '/api1'开头的请求路径
+         target: 'https://api.inews.qq.com/newsqa/v1/query/pubished/daily/',// 代理目标的基础路径
+         changeOrigin: true,
+         pathRewrite: {'^/privince-data': ''}
+       },
+       '/vaccine-data': {// 匹配所有以 '/api1'开头的请求路径
+         target: 'https://api.inews.qq.com/newsqa/',// 代理目标的基础路径
+         changeOrigin: true,
+         pathRewrite: {'^/vaccine-data': ''}
+       },
       //  '/local-static': {// 匹配所有以 '/api1'开头的请求路径
       //   target: 'http://localhost:5000/api/static',// 代理目标的基础路径
       //   changeOrigin: true,

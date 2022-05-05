@@ -1,6 +1,6 @@
 const PrivinceName = {
   安徽: 'anhui',
-  陕西: 'shanxi1',
+  陕西: 'shanxi',
   澳门: 'aomen',
   北京: 'beijing',
   重庆: 'chongqing',
@@ -36,7 +36,7 @@ const PrivinceName = {
 }
 
 export function getProvinceMapInfo (arg) {
-  const path = `/static/map/province/${PrivinceName[arg]}.json`
+  const path = `/static/map/province/${PrivinceName[arg]}`
   return {
     key: PrivinceName[arg],
     path: path

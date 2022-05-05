@@ -30,7 +30,7 @@ export default {
         // 对图表初始化配置的控制
         const initOption = {
             title: {
-            text: '中国各地区累计确诊数',
+            text: '全球累计确诊数',
             left: 20,
             top: 20
             },
@@ -42,14 +42,14 @@ export default {
             containLabel: true // 距离是包含坐标轴上的文字
             },
             yAxis: {
-            type: 'value'
+                type: 'value'   
             },
             xAxis: {
             type: 'category',
-            axisLabel: {
-            color: '#333',
-            interval: 0,
-            }
+                axisLabel: {
+                color: '#333',
+                interval: 0,
+                }
             },
             tooltip: {
             trigger: 'axis',
@@ -101,9 +101,9 @@ export default {
         async getData() {
             // if (!this.getLocalData('china')) {
             //初次请求数据
-                await this.$http.get('http://111.231.75.86:8000/api/provinces/CHN/').then(
+                await this.$http.get('http://api.tianapi.com/ncovabroad/index?key=54690b563dc6b1aca2009da3fc100993').then(
                     response => {
-                    this.allData = response.data; // 使用数据
+                    this.allData = response.data.newslist; // 使用数据
                     // this.setLocalData('china'); // 缓存数据
                     console.log('new api',this.allData);
                 }).then( () => {
@@ -131,7 +131,12 @@ export default {
         })
         const dataOption = {
             xAxis: {
-            data: province
+            data: province,
+            axisLabel: {
+                    color: '#333',
+                    rotate: -45,
+                    interval: 0,
+                }
             },
             series: [
             {
@@ -185,4 +190,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

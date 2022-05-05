@@ -1,12 +1,11 @@
 <template>
     <div class="notice-card-wrapper" >
-        <div class="header">
-        <div class="title"  @mouseover="moveShow = false" @mouseout="moveShow = true">
-            <!-- 系统公告 -->
-            <div class="inner-container" :class="moveShow?'':'active'">
-            <span v-for="(item,index) in newsData" @click="openLink(item.url)" :key="index" :v-if="index < 3">{{item.title}}</span>
-            </div>
-        </div>
+        <div class="news">
+          <div class="title"  @mouseover="moveShow = false" @mouseout="moveShow = true">
+              <div class="inner-container" :class="moveShow?'':'active'">
+              <span v-for="(item,index) in newsData" @click="openLink(item.url)" :key="index" :v-if="index < 3">{{item.title}}</span>
+              </div>
+          </div>
         </div>
     </div>
 </template>
@@ -49,10 +48,10 @@ export default {
 <style lang="less" scoped>
 .notice-card-wrapper {
   width: 100%;
-  background: #F9F9F9;
+  background: #c59696;
   border: 1px solid #EEF1F9;
   line-height: 46px;
-  .header{
+  .news{
     width: 1200px;
     overflow: hidden;
     margin: 0 auto;
@@ -73,7 +72,7 @@ export default {
       margin-right: 30px;
       font-size: 14px;
       vertical-align: middle;
-      max-width: 600px;
+      max-width: 800px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -87,7 +86,7 @@ export default {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-6300px);
+      transform: translateX(-5175px);
     }
   }
 }

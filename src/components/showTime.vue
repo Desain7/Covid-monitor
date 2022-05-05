@@ -1,5 +1,5 @@
 <template>
-    <div class="time">{{time}}</div>
+    <div class="time" style="color: white;">{{time}}</div>
 </template>
  
 <script>
@@ -52,15 +52,25 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'UnidreamLED';
+  src:url(../assets/fonts/UnidreamLED.woff); /***兼容ie9***/
+  src:url(../assets/fonts/UnidreamLED.eot?#iefix)format('embedded-opentype'), /***兼容ie6-ie8***/
+  url('../assets/fonts/UnidreamLED.woff') format('woff'), 
+  local('UnidreamLED'), url("../assets/fonts/UnidreamLED.woff");/***默认使用本地的***/
+}
 
   .time{
     float: right;
+    margin-right: 5%;
     display:inline-flex;
     font-size: 20px;
     font-weight: 500;
     color: #303133;
     text-align: left;
     line-height: 60px;
+    font-family: 'UnidreamLED';
   }
+
   
 </style>

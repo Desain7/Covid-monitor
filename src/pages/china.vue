@@ -1,23 +1,27 @@
 <template>
   <div>
-    <showNews></showNews>
-    <showInformation></showInformation>
-    <provinceConfirm></provinceConfirm>
-    <chinaConfirmLine></chinaConfirmLine>
-    <chinaMap></chinaMap>
-    <jiangxi></jiangxi>
+      <showNews></showNews>
+      <showInformation></showInformation>
+      <!-- <weather></weather> -->
+      <provinceConfirm></provinceConfirm>
+      <chinaConfirmLine></chinaConfirmLine>
+      <multiplyCondition></multiplyCondition>
+      <patientType></patientType>
+      <chinaMap></chinaMap>
   </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import chinaConfirmLine from '../components/china-confirm-line.vue'
-import chinaMap from '../components/china-map.vue'
-import showNews from '../components/showNews.vue';
-import jiangxi from '../components/province/jiangxi.vue';
-import provinceConfirm from '../components/province-confirm.vue';
-import showInformation from '../components/showInformation.vue';
+import chinaConfirmLine from '../components/china/china-confirm-line.vue'
+import multiplyCondition from '../components/china/confirm-cure-dead.vue'
+import chinaMap from '../components/china/china-map.vue'
+import showNews from '../components/china/showNews.vue';
+import provinceConfirm from '../components/china/province-confirm.vue';
+import showInformation from '../components/china/showInformation.vue';
+import patientType from '../components/china/patient-type.vue';
+// import weather from '../components/weather.vue';
 
 export default {
   name:'chinaData',
@@ -60,11 +64,13 @@ export default {
   },
   components:{
     chinaConfirmLine,
+    multiplyCondition,
     chinaMap,
     showNews,
-    jiangxi,
     provinceConfirm,
     showInformation,
+    patientType,
+    // weather,
   },
   created(){
     this.getData(),

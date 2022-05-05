@@ -1,20 +1,18 @@
 <template>
   <div>
-      <worldCondition></worldCondition>
-      <worldMap></worldMap>
-      <!-- <worldCurrentRank></worldCurrentRank> -->
+      <vaccineCondition></vaccineCondition>
+      <averVaccine></averVaccine>
   </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import worldCondition from '../components/oversea/worldCondition'
-import worldMap from '../components/oversea/world-map';
-// import worldCurrentRank from '../components/oversea/world-current-rank.vue';
+import vaccineCondition from '../components/vaccine/vaccineCondition'
+import averVaccine from '../components/vaccine/averVaccine'
 
 export default {
-  name:'globalData',
+  name:'vaccineData',
   data() {
     return{
 
@@ -53,9 +51,8 @@ export default {
 
   },
   components:{
-    worldCondition,
-    worldMap,
-    // worldCurrentRank,
+    vaccineCondition,
+    averVaccine,
   },
   created(){
     this.getData(),
