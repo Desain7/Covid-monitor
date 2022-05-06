@@ -98,24 +98,16 @@ export default {
             this.startInterval()
         })
         },
-        async getData() {
-            // if (!this.getLocalData('china')) {
-            //初次请求数据
-                await this.$http.get('http://api.tianapi.com/ncovabroad/index?key=54690b563dc6b1aca2009da3fc100993').then(
-                    response => {
-                    this.allData = response.data.newslist; // 使用数据
-                    // this.setLocalData('china'); // 缓存数据
-                    console.log('new api',this.allData);
-                }).then( () => {
-                    this.allData.sort((a, b) => {
-                        return a.confirmedCount - b.confirmedCount // 从小到大的排序
-                    })
-                    console.log('123',this.allData)
-                    this.totalPage = this.allData.length % 10 === 0 ? this.allData.length / 10 : this.allData.length / 10 + 1
-                    this.updateChart()
-                    }
-                )
-            // }
+        getData() {
+            this.allData = this.$store.state.overseaData; // 使用数据
+            // this.setLocalData('china'); // 缓存数据
+            console.log('new api',this.allData);
+            this.allData.sort((a, b) => {
+                return a.confirmedCount - b.confirmedCount // 从小到大的排序
+            })
+            console.log('123',this.allData)
+            this.totalPage = this.allData.length % 10 === 0 ? this.allData.length / 10 : this.allData.length / 10 + 1
+            this.updateChart()
             this.startInterval()
         },
         // 更新图表

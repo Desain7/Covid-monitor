@@ -14,6 +14,7 @@ const mutations = {}
 //准备state对象——保存具体的数据
 const state = {
 	overseaData:null,
+	overseaIsOk:false,
 }
 const getters = {
 	

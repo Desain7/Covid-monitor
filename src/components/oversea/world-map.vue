@@ -11,9 +11,7 @@ export default {
     data() {
         return {
             chartInstance:null,
-            mapData:{},
             allData:null,
-            provinceData:null,
         }
     },
     mounted() {
@@ -75,26 +73,6 @@ export default {
                 }
             this.chartInstance.setOption(initOption)
             this.getData()
-            // this.chartInstance.on('click', async arg => {
-            //     console.log(arg)
-            //     // arg.name 得到所点击的省份, 这个省份他是中文
-            //     const provinceInfo = getProvinceMapInfo(arg.name)
-            //     console.log(provinceInfo)
-            //     // 需要获取这个省份的地图矢量数据
-            //     // 判断当前所点击的这个省份的地图矢量数据在mapData中是否存在
-            //     if (!this.mapData[provinceInfo.key]) {
-            //     const ret = await axios.get('http://localhost:5000/api/' + provinceInfo.path)
-            //     this.mapData[provinceInfo.key] = ret.data
-            //     this.$echarts.registerMap(provinceInfo.key, ret.data)
-            //     }
-            //     const changeOption = {
-            //     geo: {
-            //         map: provinceInfo.key
-            //     }
-            //     }
-            //     this.chartInstance.setOption(changeOption)
-            //     this.getProvinceData(arg.name)
-            // })
         },
         historyMap() {
                             //     timeline: {
@@ -110,13 +88,9 @@ export default {
                             //         ],
                             // },
         },
-        async getData() {
-            await axios.get('http://api.tianapi.com/ncovabroad/index?key=54690b563dc6b1aca2009da3fc100993').then(
-                response=> {
-                    this.allData = response.data.newslist
-                    console.log('allDataGlo',this.allData)
-                },
-            )
+        getData() {
+            this.allData = this.$store.state.overseaData
+            console.log('allDataGlo',this.allData)
             this.updateChart()
         },
         updateChart() {
@@ -133,12 +107,11 @@ export default {
                     type: 'map',
                     selectedMode:false,
                     data: seriesArr,
-                    // data: [{name:'宜春市',value:100},{name:'赣州',value:200},{name:'吉安',value:300},{name:'抚州',value:400},{name:'上饶',value:500}],
-                    geoIndex: 0, // 将空气质量的数据和第0个geo配置关联在一起
+                    geoIndex: 0,
                 }],
                 tooltip: {
                         trigger: 'item',
-                        formatter: '{b}<br/>当前确诊人数：{c}'
+                        formatter: '{b}<br/>当前确诊人数:{c}'
                     },
             }
             console.log(123,this.chartInstance)

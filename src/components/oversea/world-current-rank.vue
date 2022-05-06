@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import theme from '../../assets/confirm.json';
 
 export default {
@@ -30,7 +29,8 @@ export default {
                     trigger: 'axis',
                     axisPointer: {
                     type: 'cross'
-                    }
+                    },
+                    formatter: '{b}<br/>现有确诊：{c} <br/>致死率：{c1}%'
                 },
                 grid: {
                     right: '20%'
@@ -82,20 +82,16 @@ export default {
             };
            this.chartInstance.setOption(initOption);
         },
-        async getData(){
-            await axios.get('http://api.tianapi.com/ncovabroad/index?key=54690b563dc6b1aca2009da3fc100993').then(
-                response =>{
-                    this.allData = response.data.newslist
-                    console.log('allDataGlo111',this.allData)
-                }
-            ).then( () => {
-                    this.allData.sort((a, b) => {
-                        return a.currentConfirmedCount - b.currentConfirmedCount // 从小到大的排序
-                    })
-                    console.log('123',this.allData)
-                    this.updateChart()
-                    }
-                )
+        getData(){
+            this.allData = this.$store.state.overseaData
+            console.log('allDataGlo111',this.allData)
+            console.log('allDataGlo111',this.allData)
+            this.allData.sort((a, b) => {
+                return a.currentConfirmedCount - b.currentConfirmedCount // 从小到大的排序
+            })
+            console.log('123',this.allData)
+            this.updateChart()
+                
         },
         updateChart() {
             const rankData = this.allData.slice(this.allData.length - 11, this.allData.length - 1)
