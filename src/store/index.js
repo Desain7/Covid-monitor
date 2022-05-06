@@ -13,7 +13,7 @@ const actions = {}
 const mutations = {}
 //准备state对象——保存具体的数据
 const state = {
-	baseInformation:{},
+	overseaData:null,
 }
 const getters = {
 	

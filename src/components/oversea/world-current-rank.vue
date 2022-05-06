@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             chartInstance:null,
-            allData:[],
+            allData:null,
         }
     },
     mounted() {
@@ -35,13 +35,6 @@ export default {
                 grid: {
                     right: '20%'
                 },
-                toolbox: {
-                    feature: {
-                    dataView: { show: true, readOnly: false },
-                    restore: { show: true },
-                    saveAsImage: { show: true }
-                    }
-                },
                 legend: {
                     data: ['现有确诊', '死亡率']
                 },
@@ -59,7 +52,7 @@ export default {
                     {
                         type: 'value',
                         name: '现有确诊',
-                        position: 'right',
+                        position: 'left',
                         alignTicks: true,
                         axisLine: {
                             show: true,
@@ -74,7 +67,7 @@ export default {
                         name: '死亡率',
                         position: 'right',
                         alignTicks: true,
-                        offset: 80,
+                        offset: 20,
                         axisLine: {
                             show: true,
                             lineStyle: {
