@@ -19,5 +19,3 @@ npm run build
 ```
 npm run lint
 ```
-zhang
-ye
