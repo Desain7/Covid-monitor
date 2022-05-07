@@ -1,5 +1,5 @@
 <template>
-    <div class="vaccineCondition" style="width: 500px;height: 500px; display: inline-block;" ref="chinaVaccineCondition"></div>
+    <div class="vaccineCondition" style="width: 100%;height: 90%; display: inline-block;" ref="chinaVaccineCondition"></div>
 </template>
 
 <script>

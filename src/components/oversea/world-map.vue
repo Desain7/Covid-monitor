@@ -1,5 +1,5 @@
 <template>
-    <div class="globalMap" style="width: 1000px;height: 800px; display: block;" ref="globalMap"></div>
+    <div class="globalMap" style="width: 100%;height: 90%; display: block;" ref="globalMap"></div>
 </template>
 
 <script>
@@ -37,11 +37,6 @@ export default {
             this.chartInstance = this.$echarts.init(document.querySelector(".globalMap"))
             console.log(111,this.chartInstance)
             let initOption = {
-                    title: {
-                        text: '全球现有确诊人数',
-                        left: 20,
-                        top: 20
-                    },
                     geo: {
                         type: 'map',
                         map: 'global', // chinaMap需要和registerMap中的第一个参数保持一致

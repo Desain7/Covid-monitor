@@ -1,5 +1,5 @@
 <template>
-    <div class="index">
+    <div class="index clearfix">
         <header class="header left">
             <div class="left nav">
                 <ul>
@@ -63,6 +63,7 @@ export default {
         font-size: 18px;
         font-weight: 500;
         border-bottom: 1px solid #ebeef5;
+        display: block;
     }
     .locationChange{
         display: inline-flex;

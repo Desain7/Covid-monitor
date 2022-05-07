@@ -1,5 +1,5 @@
 <template>
-    <div class="multiplyCondition" style="width: 500px;height: 500px; display: inline-block;" ref="multiplyCondition"></div>
+    <div class="multiplyCondition" style="width: 100%;height: 90%; display: inline-block;" ref="multiplyCondition"></div>
 </template>
 
 <script>
@@ -31,11 +31,6 @@ export default {
             this.chartInstance = this.$echarts.init(document.querySelector('.multiplyCondition'), 'theme');
             console.log('123123',this.chartInstance);
             let initOption = {
-                title:{
-                    show:true,
-                    text:'全国累计确诊'
-
-                },
                   grid: {
                     left: '3%',
                     right: '4%',
@@ -201,8 +196,6 @@ export default {
 </script>
 
 <style>
-.confirmLine{
-    display: inline-block;
-}
+
 
 </style>

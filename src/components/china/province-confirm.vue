@@ -1,5 +1,5 @@
 <template>
-    <div class="provinceConfirm" style="width: 500px;height: 500px; display: inline-block;" ref="provinceConfirm"></div>
+    <div class="provinceConfirm" style="width: 100%;height: 90%; display: inline-block;" ref="provinceConfirm"></div>
 </template>
 
 <script>
@@ -29,11 +29,6 @@ export default {
         this.chartInstance = this.$echarts.init(document.querySelector('.provinceConfirm'))
         // 对图表初始化配置的控制
         const initOption = {
-            title: {
-                text: '中国各地区累计确诊数',
-                left: 20,
-                top: 20
-            },
             grid: {
                 top: '20%',
                 left: '3%',

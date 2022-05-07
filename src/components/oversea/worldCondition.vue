@@ -1,5 +1,5 @@
 <template>
-    <div class="provinceConfirm" style="width: 500px;height: 500px; display: inline-block;" ref="provinceConfirm"></div>
+    <div class="provinceConfirm" style="width: 100%;height: 90%; display: inline-block;" ref="provinceConfirm"></div>
 </template>
 
 <script>
@@ -29,11 +29,6 @@ export default {
         this.chartInstance = this.$echarts.init(document.querySelector('.provinceConfirm'))
         // 对图表初始化配置的控制
         const initOption = {
-            title: {
-            text: '全球累计确诊数',
-            left: 20,
-            top: 20
-            },
             grid: {
             top: '20%',
             left: '3%',
@@ -100,12 +95,10 @@ export default {
         },
         getData() {
             this.allData = this.$store.state.overseaData; // 使用数据
-            // this.setLocalData('china'); // 缓存数据
             console.log('new api',this.allData);
             this.allData.sort((a, b) => {
                 return a.confirmedCount - b.confirmedCount // 从小到大的排序
             })
-            console.log('123',this.allData)
             this.totalPage = this.allData.length % 10 === 0 ? this.allData.length / 10 : this.allData.length / 10 + 1
             this.updateChart()
             this.startInterval()

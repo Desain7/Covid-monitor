@@ -15,6 +15,7 @@ const mutations = {}
 const state = {
 	overseaData:null,
 	overseaIsOk:false,
+	updateTime:'',
 }
 const getters = {
 	

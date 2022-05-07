@@ -1,5 +1,5 @@
 <template>
-    <div class="averVaccine" style="width: 500px;height: 500px; display: inline-block;" ref="averVaccine"></div>
+    <div class="averVaccine" style="width: 100%;height: 90%; display: inline-block;" ref="averVaccine"></div>
 </template>
 
 <script>

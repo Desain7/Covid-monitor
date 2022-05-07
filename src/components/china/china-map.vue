@@ -1,5 +1,5 @@
 <template>
-    <div class="chinaMap" style="width: 1000px;height: 800px; display: block;" ref="chinaMap" @dblclick="revertMap"></div>
+    <div class="chinaMap" style="width: 100%;height: 90%; display: block;" ref="chinaMap" @dblclick="revertMap"></div>
 </template>
 
 <script>
@@ -36,11 +36,6 @@ export default {
             )
             this.chartInstance = this.$echarts.init(document.querySelector(".chinaMap"))
             let initOption = {
-                    title: {
-                        text: '全国现有确诊人数',
-                        left: 20,
-                        top: 20
-                    },
                     geo: {
                         type: 'map',
                         map: 'china', // chinaMap需要和registerMap中的第一个参数保持一致

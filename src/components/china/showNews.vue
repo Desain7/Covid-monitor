@@ -52,7 +52,7 @@ export default {
   border: 1px solid #EEF1F9;
   line-height: 46px;
   .news{
-    width: 1200px;
+    width: 800px;
     overflow: hidden;
     margin: 0 auto;
     position: relative;

@@ -1,5 +1,5 @@
 <template>
-    <div class="confirmLine" style="width: 500px;height: 500px; display: inline-block;" ref="chinaConfirmLine"></div>
+    <div class="confirmLine" style="width: 100%;height: 100%; display: inline-block;" ref="chinaConfirmLine"></div>
 </template>
 
 <script>
@@ -30,11 +30,6 @@ export default {
             this.$echarts.registerTheme("theme", theme);
             this.chartInstance = this.$echarts.init(document.querySelector('.confirmLine'), 'theme');
             let initOption = {
-                title:{
-                    show:true,
-                    text:'全国新增确诊人数'
-
-                },
                 xAxis: {
                 type: 'category',
                 axisLabel: {
@@ -179,8 +174,6 @@ export default {
 </script>
 
 <style>
-.confirmLine{
-    display: inline-block;
-}
+
 
 </style>

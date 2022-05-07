@@ -1,5 +1,5 @@
 <template>
-    <div class='com-chart' style="width: 300px;height: 250px; display: inline-block;" ref='patientType'></div>
+    <div class='com-chart' style="width: 100%;height: 90%; display: inline-block;" ref='patientType'></div>
 </template>
 
 <script>
@@ -43,9 +43,6 @@ export default {
     initChart () {
       this.chartInstance = this.$echarts.init(this.$refs.patientType)
       const initOption = {
-        title: {
-          text: '病患类型占比',
-        },
         legend: {
           top: '15%',
           icon: 'circle',

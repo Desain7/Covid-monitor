@@ -124,16 +124,17 @@ export default {
 
 <style lang='less' scoped>
     .center{
-        height: 100px;
+        height: 150px;
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
     #last_update{
         position: absolute;
-        left: 5%;
-        top: 5%;
+        right: 5%;
+        bottom: 0;
     }
     p{
         font-size: 12px;

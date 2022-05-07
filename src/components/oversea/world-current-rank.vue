@@ -1,5 +1,5 @@
 <template>
-    <div class="worldCurrentRank" style="width: 500px;height: 500px; display: inline-block;" ref="worldCurrentRank"></div>
+    <div class="worldCurrentRank" style="width: 100%;height: 90%; display: inline-block;" ref="worldCurrentRank"></div>
 </template>
 
 <script>
