@@ -7,9 +7,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import * as echarts from 'echarts';
 import VueRouter from 'vue-router'
+import scroll from 'vue-seamless-scroll'
+
 
 Vue.use(ElementUI);
 Vue.use(VueRouter)
+Vue.use(scroll)
 //配置请求基准路径
 axios.defaults.baseURL='http://localhost:5000/api/'
 Vue.prototype.$http=axios

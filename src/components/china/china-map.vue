@@ -34,7 +34,7 @@ export default {
                     console.log('请求失败！',error.message)
                 }
             )
-            this.chartInstance = this.$echarts.init(document.querySelector(".chinaMap"))
+            this.chartInstance = this.$echarts.init(this.$refs.chinaMap)
             let initOption = {
                     geo: {
                         type: 'map',
@@ -176,8 +176,31 @@ export default {
             }
             this.chartInstance.setOption(dataOption)
         },
-        screenAdapter() {
-
+        screenAdapter () {
+            this.titleFontSize = this.$refs.chinaMap.offsetWidth / 100 * 3.6
+            const adapterOption = {
+                title: {
+                textStyle: {
+                    fontSize: this.titleFontSize
+                }
+                },
+                legend: {
+                itemWidth: this.titleFontSize,
+                itemHeight: this.titleFontSize,
+                itemGap: this.titleFontSize / 2,
+                textStyle: {
+                    fontSize: this.titleFontSize / 2
+                }
+                },
+                series: [
+                {
+                    radius: this.titleFontSize * 4.5,
+                    center: ['50%', '60%']
+                }
+                ]
+            }
+            this.chartInstance.setOption(adapterOption)
+            this.chartInstance.resize()
         },
         revertMap() {
             const revertOption = {
@@ -190,6 +213,7 @@ export default {
             this.chartInstance.setOption(revertOption)
         }
     },
+
 
     
 }

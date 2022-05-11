@@ -1,5 +1,5 @@
 <template>
-    <div  v-if="isShow" class="center">
+    <div class="center">
         <small id="last_update" class="text-muted">上次更新:{{updateTime}}</small>
         <table id="overallTable" style="text-align: center; width: 650px; height:100px;" class="table">
             <thead>
@@ -73,16 +73,11 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
-    name:'show-news',
+    name:'chinaInformation',
     data(){
         return{
-            newsData:[],
-            highRiskArea:[],
-            midRiskArea:[],
-            isShow:false,
         }
     },
     computed:{
@@ -98,31 +93,14 @@ export default {
         },
     },
     mounted() {
-        this.getData()
     },
     methods:{
-        getData() {
-            axios.get('http://api.tianapi.com/ncov/index?key=54690b563dc6b1aca2009da3fc100993').then(
-                response => {
-                    this.$store.state.baseInformation = response.data.newslist[0]
-                    this.isShow = true
-                    this.$store.state.baseInformation.riskarea.high.forEach(element => {
-                        this.highRiskArea.push(element)
-                    });
-                    this.$store.state.baseInformation.riskarea.mid.forEach(element => {
-                        this.midRiskArea.push(element)
-                    });
-                    console.log(this.$store.state.baseInformation)
-                    // console.log(this.midRiskArea)
-                }
-            )
-        },
     },
 
 }
 </script>
 
-<style lang='less' scoped>
+<style scoped>
     .center{
         height: 150px;
         display: flex;
@@ -143,48 +121,6 @@ export default {
     th{
         width: 16%;
     }
-.notice-card-wrapper {
-  width: 100%;
-  background: #c59696;
-  border: 1px solid #EEF1F9;
-  line-height: 46px;
-  .news{
-    width: 1200px;
-    overflow: hidden;
-    margin: 0 auto;
-    position: relative;
-    .title{
-      width: calc(100% - 20px);
-    }
-  }
-  .inner-container {
-    margin-left: 100%; // 把文字弄出可见区域
-    width: 2000%;
-    animation: myMove 45s linear infinite; // 定义动画
-    animation-fill-mode: forwards;
-    &.active{
-      animation-play-state: paused;
-    }
-    span{
-      margin-right: 30px;
-      font-size: 14px;
-      vertical-align: middle;
-      max-width: 800px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      display: inline-block;
-      cursor: pointer;
-    }
-  }
-  /*文字无缝滚动*/
-  @keyframes myMove {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-5175px);
-    }
-  }
-}
+
+
 </style>

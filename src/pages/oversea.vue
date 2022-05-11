@@ -5,27 +5,27 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-40">
 						<div class="xpanel xpanel-l-t">
-							<div class="title"></div>
-              <worldCondition v-if="$store.state.overseaIsOk"></worldCondition>
+							<div class="title">各国累计确诊</div>
+              <worldCondition v-if="$store.state.mainIsOk"></worldCondition>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-60">
 						<div class="xpanel xpanel-l-b">
-							<div class="title"></div>
-              <worldCurrentRank v-if="$store.state.overseaIsOk"></worldCurrentRank>
+							<div class="title">现存确诊Top10</div>
+              <worldCurrentRank v-if="$store.state.mainIsOk"></worldCurrentRank>
 						</div>
 					</div>
 				</div>
 				<div class="col col-c">
 					<div class="xpanel-wrapper xpanel-wrapper-75">
 						<div class="xpanel no-bg">
-              <worldMap v-if="$store.state.overseaIsOk"></worldMap>
+              <worldMap v-if="$store.state.mainIsOk"></worldMap>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-25">
 						<div class="xpanel xpanel-c-b">
-							<div class="title title-long"></div>
-              
+							<div class="title title-long">全球疫情概况</div>
+              <showInformation v-if="$store.state.mainIsOk"></showInformation>
 						</div>
 					</div>
 				</div>
@@ -33,16 +33,19 @@
 					<div class="xpanel-wrapper xpanel-wrapper-25">
 						<div class="xpanel xpanel-r-t">
 							<div class="title"></div>
+              
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-30">
 						<div class="xpanel xpanel-r-m">
-							<div class="title"></div>
+							<div class="title">新增确诊Top10</div>
+              <worldConfirm v-if="$store.state.mainIsOk"></worldConfirm>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-45">
 						<div class="xpanel xpanel-r-b">
-							<div class="title"></div>
+							<div class="title">世界疫情形势</div>
+              <worldSituation v-if="$store.state.mainIsOk"></worldSituation>
 						</div>
 					</div>
 				</div>
@@ -57,6 +60,9 @@ import axios from 'axios'
 import worldCondition from '../components/oversea/worldCondition'
 import worldMap from '../components/oversea/world-map';
 import worldCurrentRank from '../components/oversea/world-current-rank.vue';
+import showInformation from '../components/oversea/showInformation.vue';
+import worldConfirm from '../components/oversea/worldConfirm.vue';
+import worldSituation from '../components/oversea/worldSituation.vue';
 
 export default {
   name:'globalData',
@@ -108,8 +114,11 @@ export default {
     worldCondition,
     worldMap,
     worldCurrentRank,
+    showInformation,
+    worldConfirm,
+    worldSituation
   },
-  created(){
+  mounted(){
     this.getData()
   },
 }

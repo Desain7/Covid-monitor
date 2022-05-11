@@ -48,8 +48,8 @@ export default {
 <style lang="less" scoped>
 .notice-card-wrapper {
   width: 100%;
-  background: #c59696;
-  border: 1px solid #EEF1F9;
+  background: rgb(11,15,52);
+  // border: 1px solid #EEF1F9;
   line-height: 46px;
   .news{
     width: 800px;

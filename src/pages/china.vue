@@ -5,13 +5,13 @@
 				<div class="col col-l">
 					<div class="xpanel-wrapper xpanel-wrapper-40">
 						<div class="xpanel xpanel-l-t">
-							<div class="title"></div>
+							<div class="title">省份累计确诊</div>
               <provinceConfirm></provinceConfirm>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-60">
 						<div class="xpanel xpanel-l-b">
-							<div class="title"></div>
+							<div class="title">全国新增确诊</div>
               <chinaConfirmLine></chinaConfirmLine>
 						</div>
 					</div>
@@ -24,26 +24,27 @@
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-25">
 						<div class="xpanel xpanel-c-b">
-							<div class="title title-long"></div>
-              <showInformation></showInformation>
+							<div class="title title-long">当前疫情</div>
+              <showInformation v-if="this.$store.state.baseIsOk"></showInformation>
 						</div>
 					</div>
 				</div>
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-25">
 						<div class="xpanel xpanel-r-t">
-							<div class="title"></div>
+							<div class="title">病患类型分布</div>
                <patientType></patientType>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-30">
 						<div class="xpanel xpanel-r-m">
-							<div class="title"></div>
+							<div class="title" >中高风险地区</div>
+              <riskArea v-if="this.$store.state.baseIsOk"></riskArea>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-45">
 						<div class="xpanel xpanel-r-b">
-							<div class="title"></div>
+							<div class="title">全国疫情形势</div>
               <multiplyCondition></multiplyCondition>
 						</div>
 					</div>
@@ -65,6 +66,7 @@ import showNews from '../components/china/showNews.vue';
 import provinceConfirm from '../components/china/province-confirm.vue';
 import showInformation from '../components/china/showInformation.vue';
 import patientType from '../components/china/patient-type.vue';
+import riskArea from '../components/china/riskArea.vue';
 // import weather from '../components/weather.vue';
 
 export default {
@@ -114,23 +116,21 @@ export default {
     provinceConfirm,
     showInformation,
     patientType,
+    riskArea,
     // weather,
   },
   created(){
     this.getData(),
       
-    axios.get('http://111.231.75.86:8000/api/provinces/CHN/').then(
-          response => {
-						console.log('成功获取数据')
-						this.$store.state.covidData = response.data
-                        console.log(response.data)
-                        console.log('new 123123123api',this.$store.state.covidData);
-					},
-          error => {
-						console.log('请求失败',error.message)
-					}
-                    
+            
+    axios.get('http://api.tianapi.com/ncov/index?key=54690b563dc6b1aca2009da3fc100993').then(
+        response => {
+            this.$store.state.baseInformation = response.data.newslist[0]
+            this.$store.state.baseIsOk = true
+            console.log('123',this.$store.state.baseInformation)
+        }
     )
+        
   },
 }
 </script>

@@ -16,6 +16,10 @@ const state = {
 	overseaData:null,
 	overseaIsOk:false,
 	updateTime:'',
+	baseInformation:null,
+	baseIsOk:false,
+	mainInformation:null,
+	mainIsOk:false,
 }
 const getters = {
 	

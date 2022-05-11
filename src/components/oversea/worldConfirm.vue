@@ -1,5 +1,5 @@
 <template>
-    <div class="worldCurrentRank" style="width: 100%;height: 90%; display: inline-block;" ref="worldCurrentRank"></div>
+    <div class="worldConfirm" style="width: 100%;height: 90%; display: inline-block;" ref="worldConfirm"></div>
 </template>
 
 <script>
@@ -23,20 +23,20 @@ export default {
     methods: {
         initChart() {
             this.$echarts.registerTheme("theme", theme);
-            this.chartInstance = this.$echarts.init(document.querySelector('.worldCurrentRank'), 'theme');
+            this.chartInstance = this.$echarts.init(this.$refs.worldConfirm, 'theme');
             let initOption = {
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
                     type: 'cross'
                     },
-                    formatter: '{b}<br/>现有确诊：{c} <br/>致死率：{c1}%'
+                    formatter: '{b}<br/>新增确诊：{c}'
                 },
                 grid: {
                     right: '20%'
                 },
                 legend: {
-                    data: ['现有确诊', '致死率']
+                    data: ['新增确诊']
                 },
                 xAxis: [
                     {
@@ -51,7 +51,7 @@ export default {
                 yAxis: [
                     {
                         type: 'value',
-                        name: '现有确诊',
+                        name: '新增确诊',
                         position: 'left',
                         alignTicks: true,
                         axisLine: {
@@ -62,45 +62,22 @@ export default {
                             }
                         },
                     },
-                    {
-                        type: 'value',
-                        name: '致死率',
-                        position: 'right',
-                        alignTicks: true,
-                        offset: 20,
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                            // color: colors[1]
-                            }
-                        },
-                        axisLabel: {
-                            formatter: '{value}%'
-                        }
-                    },
                 ],
             };
            this.chartInstance.setOption(initOption);
         },
         getData(){
-            this.allData = this.$store.state.mainInformation.caseOutsideList
-            this.allData.sort((a, b) => {
-                return a.curConfirm - b.curConfirm // 从小到大的排序
-            })
+            this.allData = this.$store.state.mainInformation.topAddCountry
             console.log('123',this.allData)
             this.updateChart()
                 
         },
         updateChart() {
-            const rankData = this.allData.slice(this.allData.length - 11, this.allData.length - 1)
-            const province = rankData.map((item) => {
-            return item.area
+            const province = this.allData.map((item) => {
+            return item.name
             })
-            const currentConfirmedCount = rankData.map((item) => {
-            return item.curConfirm
-            })
-            const deadRate = rankData.map((item) => {
-            return parseFloat(item.diedPercent)
+            const currentConfirmedCount = this.allData.map((item) => {
+            return item.value
             })
             const dataOption = {
                 xAxis: {
@@ -112,23 +89,17 @@ export default {
                 },
                 series: [
                     {
-                    name: '现有确诊',
+                    name: '新增确诊',
                     type: 'bar',
                     yAxisIndex: 0,
                     data: currentConfirmedCount
                     },
-                    {
-                    name: '致死率',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    data: deadRate
-                    }
                 ]
             }
             this.chartInstance.setOption(dataOption);
         },
         screenAdapter () {
-            this.titleFontSize = this.$refs.worldCurrentRank.offsetWidth / 100 * 3.6
+            this.titleFontSize = this.$refs.worldConfirm.offsetWidth / 100 * 3.6
             const adapterOption = {
                 title: {
                 textStyle: {

@@ -21,6 +21,11 @@ module.exports = {
          changeOrigin: true,
          pathRewrite: {'^/vaccine-data': ''}
        },
+       '/global-data': {// 匹配所有以 '/api1'开头的请求路径
+         target: 'https://www.maomin.club/fy/',// 代理目标的基础路径
+         changeOrigin: true,
+         pathRewrite: {'^/global-data': ''}
+       },
       //  '/local-static': {// 匹配所有以 '/api1'开头的请求路径
       //   target: 'http://localhost:5000/api/static',// 代理目标的基础路径
       //   changeOrigin: true,

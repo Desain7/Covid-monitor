@@ -84,7 +84,7 @@ export default {
                             // },
         },
         getData() {
-            this.allData = this.$store.state.overseaData
+            this.allData = this.$store.state.mainInformation.caseOutsideList
             console.log('allDataGlo',this.allData)
             this.updateChart()
         },
@@ -93,10 +93,16 @@ export default {
             // 图例的数据
             const seriesArr = this.allData.map(item => {
                 return {
-                    name:item.provinceName, 
-                    value:item.currentConfirmedCount
+                    name:item.area, 
+                    value:item.curConfirm
                 }    
             })
+            seriesArr.push(
+                {
+                    name:'中国',
+                    value:this.$store.state.mainInformation.summaryDataIn.curConfirm
+                }
+            )
             const dataOption = {
                 series: [{
                     type: 'map',
@@ -112,8 +118,31 @@ export default {
             console.log(123,this.chartInstance)
             this.chartInstance.setOption(dataOption)
         },
-        screenAdapter() {
-
+            screenAdapter () {
+                this.titleFontSize = this.$refs.globalMap.offsetWidth / 100 * 3.6
+                const adapterOption = {
+                    title: {
+                    textStyle: {
+                        fontSize: this.titleFontSize
+                    }
+                    },
+                    legend: {
+                    itemWidth: this.titleFontSize,
+                    itemHeight: this.titleFontSize,
+                    itemGap: this.titleFontSize / 2,
+                    textStyle: {
+                        fontSize: this.titleFontSize / 2
+                    }
+                    },
+                    series: [
+                    {
+                        radius: this.titleFontSize * 4.5,
+                        center: ['50%', '60%']
+                    }
+                    ]
+                }
+                this.chartInstance.setOption(adapterOption)
+                this.chartInstance.resize()
         },
     },
 

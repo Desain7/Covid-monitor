@@ -1,5 +1,5 @@
 <template>
-    <div class='com-chart' style="width: 100%;height: 90%; display: inline-block;" ref='patientType'></div>
+    <div class='com-chart' style="width: 80%;height: 75%; display: inline-block;" ref='patientType'></div>
 </template>
 
 <script>
@@ -33,11 +33,11 @@ export default {
   mounted () {
     this.initChart()
     this.getData()
-    // window.addEventListener('resize', this.screenAdapter)
-    // this.screenAdapter()
+    window.addEventListener('resize', this.screenAdapter)
+    this.screenAdapter()
   },
   destroyed () {
-    // window.removeEventListener('resize', this.screenAdapter)
+    window.removeEventListener('resize', this.screenAdapter)
   },
   methods: {
     initChart () {
@@ -121,32 +121,32 @@ export default {
       }
       this.chartInstance.setOption(dataOption)
     },
-    // screenAdapter () {
-    //   this.titleFontSize = this.$refs.hot_ref.offsetWidth / 100 * 3.6
-    //   const adapterOption = {
-    //     title: {
-    //       textStyle: {
-    //         fontSize: this.titleFontSize
-    //       }
-    //     },
-    //     legend: {
-    //       itemWidth: this.titleFontSize,
-    //       itemHeight: this.titleFontSize,
-    //       itemGap: this.titleFontSize / 2,
-    //       textStyle: {
-    //         fontSize: this.titleFontSize / 2
-    //       }
-    //     },
-    //     series: [
-    //       {
-    //         radius: this.titleFontSize * 4.5,
-    //         center: ['50%', '60%']
-    //       }
-    //     ]
-    //   }
-    //   this.chartInstance.setOption(adapterOption)
-    //   this.chartInstance.resize()
-    // },
+    screenAdapter () {
+      this.titleFontSize = this.$refs.patientType.offsetWidth / 100 * 3.6
+      const adapterOption = {
+        title: {
+          textStyle: {
+            fontSize: this.titleFontSize
+          }
+        },
+        legend: {
+          itemWidth: this.titleFontSize,
+          itemHeight: this.titleFontSize,
+          itemGap: this.titleFontSize / 2,
+          textStyle: {
+            fontSize: this.titleFontSize / 2
+          }
+        },
+        series: [
+          {
+            radius: this.titleFontSize * 4.5,
+            center: ['50%', '60%']
+          }
+        ]
+      }
+      this.chartInstance.setOption(adapterOption)
+      this.chartInstance.resize()
+    },
   },
 
 }
