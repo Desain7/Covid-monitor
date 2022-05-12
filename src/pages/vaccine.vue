@@ -74,34 +74,34 @@ export default {
   },
   methods: {
     async getData() {
-        // if (!this.getLocalData('china')) {
+        if (!this.getLocalData('vaccine')) {
         //初次请求数据
             await axios.get('http://localhost:8080/vaccine-data//v1/automation/modules/list?modules=VaccineSituationData').then(
                 response => {
                 this.$store.state.vaccineInformation = response.data.data.VaccineSituationData; // 使用数据
-                // this.setLocalData('china'); // 缓存数据
+                this.setLocalData('vaccine'); // 缓存数据
             });
-        // }
+        }
         this.$store.state.vaccineIsOk = true;
     },
-    // setLocalData(key) {
-    //     // 缓存数据
-    //     sessionStorage.setItem(`${key}CovidData`, JSON.stringify(this.$store.state.chinaData)); // 缓存数据
-    //     sessionStorage.setItem(`${key}Timestamp`, Date.now()); // 记录时间戳
-    // },
-    // //获取缓存  查找映射表 并 检查过期时间 
-    // getLocalData(key) {
-    //     let storageTimestamp = sessionStorage.getItem(`${key}Timestamp`);
-    //     let expires = 1000 * 600; // 有效时间
-    //     let timestamp = Date.now();  // 当前时间戳
-    //     // 从缓存中取数据（10min内数据）
-    //     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
-    //         let chinaData = sessionStorage.getItem(`${key}CovidData`); // 从缓存中拿到数据给程序使用
-    //         this.$store.state.chinaData = JSON.parse(chinaData);
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    setLocalData(key) {
+        // 缓存数据
+        localStorage.setItem(`${key}Data`, JSON.stringify(this.$store.state.vaccineInformation)); // 缓存数据
+        localStorage.setItem(`${key}Timestamp`, Date.now()); // 记录时间戳
+    },
+    //获取缓存  查找映射表 并 检查过期时间 
+    getLocalData(key) {
+        let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
+        let expires = 1000 * 600; // 有效时间
+        let timestamp = Date.now();  // 当前时间戳
+        // 从缓存中取数据（10min内数据）
+        if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
+            let vaccineInformation = localStorage.getItem(`${key}Data`); // 从缓存中拿到数据给程序使用
+            this.$store.state.vaccineInformation = JSON.parse(vaccineInformation);
+            return true;
+        }
+        return false;
+    }
 
   },
   components:{
