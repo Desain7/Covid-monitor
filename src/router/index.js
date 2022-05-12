@@ -20,6 +20,7 @@ const router = new VueRouter({
 			path:'/vaccine',
 			component:vaccine
 		},
+		{path: '*', redirect: '/china'}
 
 	]
 })
