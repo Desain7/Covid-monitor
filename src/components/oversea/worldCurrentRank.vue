@@ -39,6 +39,21 @@ export default {
                             fontSize: 16
                         },
                 },
+                color:[{
+                    type: 'linear',
+                    x: 0,
+                    y: 1,
+                    x2: 0,
+                    y2: 0,
+                    colorStops: [{
+                        offset: 0, color: 'rgb(255,128,128)' // 0% 处的颜色
+                    }, {
+                        offset: 1, color: 'rgb(255,0,0)' // 100% 处的颜色
+                    }],
+                    global: false // 缺省为 false
+                },
+                {color: 'rgb(0,255,0)'}
+                ],
                 xAxis: [
                     {
                     type: 'category',
@@ -127,6 +142,7 @@ export default {
                         yAxisIndex: 0,
                         data: currentConfirmedCount,
                         markPoint:{
+                            label:{color:'#fff'},
                             data: [
                                 {
                                     type: 'max',
