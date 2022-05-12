@@ -56,9 +56,8 @@ export default {
 
 <style scoped>
     .index{
-        background-color: #f5f7fa;
         padding: 0;
-        height: 60px;
+        height: 50px;
         color: white;
         font-size: 18px;
         font-weight: 500;
