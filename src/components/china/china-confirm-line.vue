@@ -33,16 +33,23 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
-                    rotate: -45,
-                    interval: 2,
+                    color: '#fff',
+                    rotate: -15,
+                    interval: 1,
                 }
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    axisLabel: {
+                    color: '#fff',
+                    },
                 },
                 legend: {
-                    data: ['新增确诊', '新增境外输入']
+                    data: ['新增确诊', '新增境外输入'],
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                    },
                 },
                 series: [
                     {
@@ -52,8 +59,8 @@ export default {
                 dataZoom: [
                     {
                         type: 'slider',
-                        show: true,
-                        start: 50,
+                        show: false,
+                        start: 75,
                         end: 100,
                         handleSize: 8
                     },
@@ -64,7 +71,7 @@ export default {
                     },
                     {
                         type: 'slider',
-                        show: true,
+                        show: false,
                         yAxisIndex: 0,
                         filterMode: 'empty',
                         width: 12,

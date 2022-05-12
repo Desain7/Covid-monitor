@@ -37,12 +37,15 @@ export default {
                 containLabel: true // 距离是包含坐标轴上的文字
             },
             yAxis: {
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+                    color: '#fff',
+                },
             },
             xAxis: {
                 type: 'category',
                 axisLabel: {
-                color: '#333',
+                color: '#fff',
                 interval: 0,
                 }
             },

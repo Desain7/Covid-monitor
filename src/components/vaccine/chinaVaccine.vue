@@ -30,9 +30,9 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
-                    rotate: -45,
-                    interval: 2,
+                    color: '#fff',
+                    rotate: -25,
+                    interval: 1,
                 }
                 },
                 yAxis: [
@@ -45,9 +45,10 @@ export default {
                             show: true,
                             lineStyle: {
                             // color: colors[0]
-                        
+                            
                             }
                         },
+                        axisLabel:{color: '#fff'},
                         scale:true,
                     },
                     {
@@ -55,7 +56,6 @@ export default {
                         name: '每百人接种',
                         position: 'right',
                         alignTicks: true,
-                        offset: 20,
                         axisLine: {
                             show: true,
                             lineStyle: {
@@ -63,13 +63,18 @@ export default {
                             }
                         },
                         axisLabel: {
+                            color: '#fff',
                             formatter: '{value}'
                         },
                         scale:true
                     },
                 ],
                 legend: {
-                    data: ['累计接种', '每百人接种']
+                    data: ['累计接种', '每百人接种'],
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 10
+                        },
                 },
                 series: [
                     {
@@ -88,8 +93,8 @@ export default {
                 dataZoom: [
                     {
                         type: 'slider',
-                        show: true,
-                        start: 50,
+                        show: false,
+                        start: 80,
                         end: 100,
                         handleSize: 8
                     },
@@ -135,7 +140,7 @@ export default {
                         focus: 'series'
                     },
                     data: this.vaccined,
-                    color: 'rgb(44,91,142)'
+                    color: 'rgb(63,177,227)'
                     },
                     {
                     name: '每百人接种',
@@ -144,7 +149,7 @@ export default {
                         focus: 'series'
                     },
                     data: this.perHundred,
-                    color: 'rgb(96,187,252)'
+                    color: 'rgb(44,91,142)'
                     }
                 ], 
             }

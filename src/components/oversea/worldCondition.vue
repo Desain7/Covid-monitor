@@ -37,14 +37,13 @@ export default {
             containLabel: true // 距离是包含坐标轴上的文字
             },
             yAxis: {
-                type: 'value'   
+                type: 'value',
+                axisLabel: {
+                    color: '#fff',
+                },
             },
             xAxis: {
-            type: 'category',
-                axisLabel: {
-                color: '#333',
-                interval: 0,
-                }
+                type: 'category',
             },
             tooltip: {
             trigger: 'axis',
@@ -118,7 +117,7 @@ export default {
             xAxis: {
             data: province,
             axisLabel: {
-                    color: '#333',
+                    color: '#fff',
                     rotate: -45,
                     interval: 0,
                 }

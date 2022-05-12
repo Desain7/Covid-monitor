@@ -16,6 +16,7 @@ export default {
     mounted() {
         this.initChart()
         this.getData()
+        this.autoPlay()
         window.addEventListener('resize', this.screenAdapter)
     },
     destroyed() {
@@ -29,17 +30,29 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
-                    rotate: -45,
-                    interval: 2,
+                    color: '#fff',
+                    rotate: -25,
+                    interval: 0,
                 }
                 },
-                yAxis: {
-                    type: 'value'
-                },
-                // legend: {
-                //     data: ['新增确诊', '新增境外输入']
-                // },
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '累计接种剂次/万人',
+                        alignTicks: true,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                            // color: colors[1]
+                            }
+                        },
+                        axisLabel: {
+                            color: '#fff',
+                            formatter: '{value}'
+                        },
+                        scale:true
+                    },
+                ],
                 series: [
                     {
                     type: 'line'
@@ -48,33 +61,23 @@ export default {
                 dataZoom: [
                     {
                         type: 'slider',
-                        show: true,
-                        start: 50,
-                        end: 100,
-                        handleSize: 8
+                        show: false,
+                        start: 0,
+                        end: 5,
+                        handleSize: 6
                     },
                     {
                         type: 'inside',
                         start: 50,
                         end: 100
                     },
-                    {
-                        type: 'slider',
-                        show: true,
-                        yAxisIndex: 0,
-                        filterMode: 'empty',
-                        width: 12,
-                        height: '70%',
-                        handleSize: 8,
-                        showDataShadow: false,
-                        left: '93%'
-                    }
                 ],
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
-                    type: 'line'
+                        type: 'line'
                     },
+                    formatter: '{b}<br/>已接种剂次：{c}万人'
                 },
             };
            this.chartInstance.setOption(initOption);
@@ -105,22 +108,54 @@ export default {
                     emphasis: {
                         focus: 'series'
                     },
-                    data: this.totalVaccinations,
+                    data: this.totalVaccinations.map(item =>{
+                        return (item / 10000).toFixed(1)}),
                     color: 'rgb(63,177,227)'
                     },
-                    // {
-                    // name: '新增境外输入',
-                    // type: 'line',
-                    // emphasis: {
-                    //     focus: 'series'
-                    // },
-                    // data: this.input,
-                    // color: 'rgb(71,109,160)'
-                    // }
                 ], 
             }
             this.chartInstance.setOption(dataOption);
         },
+            autoPlay() {
+            let option = {
+                    dataZoom: [
+                        {
+                            type: 'slider',
+                            show: false,
+                            start: 0,
+                            end: 5,
+                            handleSize: 8
+                        },
+                        {
+                            type: 'inside',
+                            start: 50,
+                            end: 100
+                        },
+                        {
+                            type: 'slider',
+                            show: false,
+                            yAxisIndex: 0,
+                            filterMode: 'empty',
+                            width: 12,
+                            height: '70%',
+                            handleSize: 8,
+                            showDataShadow: false,
+                            left: '93%'
+                        }
+                    ],
+                };
+
+            this.timeOut=setInterval(()=>{
+                    if (option.dataZoom[0].endValue == this.countries.length ) {
+                    option.dataZoom[0].end = 5;
+                    option.dataZoom[0].start = 0;
+                    } else {
+                    option.dataZoom[0].end = option.dataZoom[0].end + 1;
+                    option.dataZoom[0].start = option.dataZoom[0].start + 1;
+                    }
+                    this.chartInstance.setOption(option);
+                },2000)
+            },
         screenAdapter () {
             this.titleFontSize = this.$refs.chinaVaccineCondition.offsetWidth / 100 * 3.6
             const adapterOption = {

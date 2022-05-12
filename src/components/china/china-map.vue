@@ -44,7 +44,7 @@ export default {
                         label: {
                             show: true, // 展示标签
                             backgroundColor:'rgb(222,222,222)',
-                            borderRadius:5,
+                            borderRadius:10,
                         },
                         itemStyle: {
                             normal: {
@@ -69,8 +69,13 @@ export default {
                         min: 1,
                         max: 2,
                     },
+                    
                     visualMap: {
                     min: 0,
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                        },
                     inRange: {
                         color: ['white', 'red'] // 控制颜色渐变的范围
                     },

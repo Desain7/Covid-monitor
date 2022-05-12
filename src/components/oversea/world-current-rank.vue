@@ -32,11 +32,12 @@ export default {
                     },
                     formatter: '{b}<br/>现有确诊：{c} <br/>致死率：{c1}%'
                 },
-                grid: {
-                    right: '20%'
-                },
                 legend: {
-                    data: ['现有确诊', '致死率']
+                    data: ['现有确诊', '致死率'],
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                        },
                 },
                 xAxis: [
                     {
@@ -44,7 +45,6 @@ export default {
                     axisTick: {
                         alignWithLabel: true
                     },
-                    // prettier-ignore
                     data: []
                     }
                 ],
@@ -57,8 +57,6 @@ export default {
                         axisLine: {
                             show: true,
                             lineStyle: {
-                            // color: colors[0]
-                        
                             }
                         },
                     },
@@ -67,11 +65,9 @@ export default {
                         name: '致死率',
                         position: 'right',
                         alignTicks: true,
-                        offset: 20,
                         axisLine: {
                             show: true,
                             lineStyle: {
-                            // color: colors[1]
                             }
                         },
                         axisLabel: {
@@ -106,22 +102,49 @@ export default {
                 xAxis: {
                 type: 'category',
                 data: province,
+                axisLabel: {
+                    color: '#fff',
+                    interval: 0,
+                    }
                 },
-                yAxis: {
-                    type: 'value'
-                },
+                yAxis: [
+                    {type: 'value',
+                    axisLabel: {
+                        color: '#fff',
+                    }
+                    },
+                    {type: 'value',
+                    axisLabel: {
+                        color: '#fff',
+                    }
+                    },
+                    
+                ],
                 series: [
                     {
-                    name: '现有确诊',
-                    type: 'bar',
-                    yAxisIndex: 0,
-                    data: currentConfirmedCount
+                        name: '现有确诊',
+                        type: 'bar',
+                        yAxisIndex: 0,
+                        data: currentConfirmedCount,
+                        markPoint:{
+                            data: [
+                                {
+                                    type: 'max',
+                                    name: '最大值',
+                                },	
+                                {
+                                    type: 'min',
+                                    name: '最小值',
+                                },
+                            ]
+                        }
                     },
                     {
                     name: '致死率',
                     type: 'line',
                     yAxisIndex: 1,
                     data: deadRate
+                    
                     }
                 ]
             }

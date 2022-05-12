@@ -1,5 +1,5 @@
 <template>
-    <div class='continentSituation' style="width: 75%;height: 75%; display: inline-block;" ref='continentSituation'></div>
+    <div class='continentSituation' style="width: 80%;height: 75%;; display: inline-block;" ref='continentSituation'></div>
 </template>
 
 <script>
@@ -50,12 +50,18 @@ export default {
                 icon: 'circle',
                 orient: 'vertical',
                 left: 'right',
+                itemHeight: 6,
+                textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                        },
             },
             series: [
                 {
                 name: '现有确诊',
                 type: 'pie',
                 radius: ['40%', '70%'],
+                center: ["30%", "30%"],
                 avoidLabelOverlap: false,
                 label: {
                     show: false,

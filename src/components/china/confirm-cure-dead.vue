@@ -15,6 +15,7 @@ export default {
             heal:[],
             dead:[],
             input:[],
+            timeOut:null,
         }
     },
     mounted() {
@@ -40,17 +41,23 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
-                    rotate: -45,
-                    interval: 2,
+                    color: '#fff',
+                    rotate: -15,
+                    interval: 1,
                 }
                 },
                 yAxis: {
-                    type: 'value'
-                    
+                    type: 'value',
+                    axisLabel: {
+                    color: '#fff',
+                    },
                 },
                 legend: {
-                    data: ['累计确诊', '累计治愈', '累计死亡', '累计境外输入']
+                    data: ['累计确诊', '累计治愈', '累计死亡', '累计境外输入'],
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                        },
                 },
                 series: [
                     {
@@ -60,8 +67,8 @@ export default {
                 dataZoom: [
                     {
                         type: 'slider',
-                        show: true,
-                        start: 50,
+                        show: false,
+                        start: 75,
                         end: 100,
                         handleSize: 8
                     },
@@ -72,7 +79,7 @@ export default {
                     },
                     {
                         type: 'slider',
-                        show: true,
+                        show: false,
                         yAxisIndex: 0,
                         filterMode: 'empty',
                         width: 12,
@@ -163,6 +170,48 @@ export default {
             }
             this.chartInstance.setOption(dataOption);
         },
+        autoPlay() {
+            let option = {
+                dataZoom: [
+                    {
+                        type: 'slider',
+                        show: true,
+                        start: 75,
+                        end: 100,
+                        handleSize: 8
+                    },
+                    {
+                        type: 'inside',
+                        start: 50,
+                        end: 100
+                    },
+                    {
+                        type: 'slider',
+                        show: true,
+                        yAxisIndex: 0,
+                        filterMode: 'empty',
+                        width: 12,
+                        height: '70%',
+                        handleSize: 8,
+                        showDataShadow: false,
+                        left: '93%'
+                    }
+                ],
+            };
+
+        this.timeOut=setInterval(()=>{
+                if (option.dataZoom[0].endValue == this.date.length ) {
+                option.dataZoom[0].end = 5;
+                option.dataZoom[0].start = 0;
+                } else {
+                option.dataZoom[0].end = option.dataZoom[0].end + 1;
+                option.dataZoom[0].start = option.dataZoom[0].start + 1;
+                }
+                this.chartInstance.setOption(option);
+            },2000)
+        },
+  
+        },
         screenAdapter () {
             this.titleFontSize = this.$refs.multiplyCondition.offsetWidth / 100 * 3.6
             const adapterOption = {
@@ -190,8 +239,8 @@ export default {
             this.chartInstance.resize()
             },
 
-    }
 }
+
 
 </script>
 

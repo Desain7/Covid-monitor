@@ -48,10 +48,18 @@ export default {
           icon: 'circle',
           orient: 'vertical',
           left: 'right',
+          textStyle: { //图例文字的样式
+            color: '#fff',
+            fontSize: 16
+          },
+        },
+        grid:{
+          bottom: '5%',
         },
         tooltip: {
           show: true,
         },
+        color:['rgb(239,102,103)','rgb(84,111,198)','rgb(145,205,118)','rgb(80,80,80)' ],
         series: [
           {
             type: 'pie',
@@ -60,6 +68,7 @@ export default {
             emphasis: {
               label: {
                 show: true
+                
               },
               emphasis: {
                   shadowBlur: 10,
@@ -91,7 +100,6 @@ export default {
       const seriesData = [{
         name: '现存确诊',
         value: this.patientData.currentConfirmedCount,
-        
       }, {
         name: '现存无症状',
         value: this.patientData.suspectedCount

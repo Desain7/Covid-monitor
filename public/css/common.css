@@ -140,9 +140,9 @@ a:hover{
 .li_ul li:hover{
     background-color: #4b8df8;
 }
-.li_ul li a{
-    color: #ffffff;
-    font-size: 13px;
+li a{
+    color: rgb(24,91,255);
+    font-size: 20px;
     text-decoration: none;
 }
 
@@ -160,8 +160,9 @@ a:hover{
 }
 
 .ativeRouter{
-    color: #e8f7fe;
+    color: #fff;
     font-size: 30px;
+
 }
 
 

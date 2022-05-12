@@ -1,5 +1,5 @@
 <template>
-    <div class="worldConfirm" style="width: 100%;height: 90%; display: inline-block;" ref="worldConfirm"></div>
+    <div class="worldConfirm" style="width: 100%;height: 100%; display: inline-block;" ref="worldConfirm"></div>
 </template>
 
 <script>
@@ -32,14 +32,13 @@ export default {
                     },
                     formatter: '{b}<br/>新增确诊：{c}'
                 },
-                grid: {
-                    right: '20%'
-                },
-                legend: {
-                    data: ['新增确诊']
-                },
+                
                 xAxis: [
                     {
+                    axisLabel: {
+                        color: '#fff',
+                        interval: 0,
+                    },
                     type: 'category',
                     axisTick: {
                         alignWithLabel: true
@@ -54,6 +53,9 @@ export default {
                         name: '新增确诊',
                         position: 'left',
                         alignTicks: true,
+                        axisLabel: {
+                            color: '#fff',
+                        },
                         axisLine: {
                             show: true,
                             lineStyle: {
@@ -92,7 +94,19 @@ export default {
                     name: '新增确诊',
                     type: 'bar',
                     yAxisIndex: 0,
-                    data: currentConfirmedCount
+                    data: currentConfirmedCount,
+                    markPoint:{
+                        data: [
+                            {
+                                type: 'max',
+                                name: '最大值',
+                            },	
+                            {
+                                type: 'min',
+                                name: '最小值',
+                            },
+                        ]
+			}
                     },
                 ]
             }

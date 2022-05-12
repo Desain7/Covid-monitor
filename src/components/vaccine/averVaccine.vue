@@ -12,6 +12,7 @@ export default {
             chartInstance:null,
             countries:[],
             totalVaccinationsPerHundred:[],
+            size:[]
         }
     },
     mounted() {
@@ -30,46 +31,40 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
+                    color: '#fff',
                     rotate: -45,
-                    interval: 2,
+                    interval: 0,
                 }
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    axisLabel:{color: '#fff'},
                 },
-                // legend: {
-                //     data: ['新增确诊', '新增境外输入']
-                // },
                 series: [
                     {
-                    type: 'line'
+                        type: 'line',
+
+                              itemStyle: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(120, 36, 50, 0.5)',
+                                shadowOffsetY: 5,
+                            }
                     }
                 ], 
                 dataZoom: [
                     {
                         type: 'slider',
                         show: true,
-                        start: 50,
-                        end: 100,
+                        start: 0,
+                        end: 5,
                         handleSize: 8
                     },
                     {
                         type: 'inside',
-                        start: 50,
+                        start: 90,
                         end: 100
                     },
-                    {
-                        type: 'slider',
-                        show: true,
-                        yAxisIndex: 0,
-                        filterMode: 'empty',
-                        width: 12,
-                        height: '70%',
-                        handleSize: 8,
-                        showDataShadow: false,
-                        left: '93%'
-                    }
+                    
                 ],
                 tooltip: {
                     trigger: 'axis',
@@ -83,6 +78,7 @@ export default {
         async getData(){
             this.$store.state.vaccineInformation.forEach(item => {
                 this.totalVaccinationsPerHundred.push((item.total_vaccinations_per_hundred / 100).toFixed(2));
+                this.size.push((item.total_vaccinations / 100000000).toFixed(2) + 5)
                 this.countries.push(item.country);
             });
             this.updateChart()
@@ -98,6 +94,7 @@ export default {
                 },
                 series:[
                     {
+                    symbolSize: this.size,
                     name: '平均每人接种',
                     type: 'scatter',
                     emphasis: {
@@ -105,7 +102,9 @@ export default {
                     },
                     data: this.totalVaccinationsPerHundred,
                     color: 'rgb(63,177,227)'
+                    
                     },
+                    
                     // {
                     // name: '新增境外输入',
                     // type: 'line',

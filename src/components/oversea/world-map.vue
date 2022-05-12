@@ -66,6 +66,10 @@ export default {
                     },
                     visualMap: {
                     min: 0,
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                        },
                     inRange: {
                         color: ['white', 'red'] // 控制颜色渐变的范围
                     },

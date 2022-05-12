@@ -71,6 +71,10 @@ export default {
                     continuous:{
                         show:true,
                     },
+                    textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 16
+                    },
                     pieces: [
                         {min: 100000000}, // 不指定 max，表示 max 为无限大（Infinity）。
                         {min: 10000000, max: 99999999},
@@ -119,7 +123,7 @@ export default {
                 }],
                 tooltip: {
                         trigger: 'item',
-                        formatter: '{b}<br/>当前接种人数:{c}'
+                        formatter: '{b}<br/>当前接种剂次:{c}'
                     },
             }
             this.chartInstance.setOption(dataOption)

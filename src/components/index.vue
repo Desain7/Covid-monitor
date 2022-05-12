@@ -78,5 +78,8 @@ export default {
     .vaccine{
         display: inline-block;
     }
+    ul li{
+        z-index: 99;
+    }
     
 </style>

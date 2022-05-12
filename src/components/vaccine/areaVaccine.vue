@@ -29,9 +29,9 @@ export default {
                 xAxis: {
                 type: 'category',
                 axisLabel: {
-                    color: '#333',
-                    rotate: -45,
-                    interval: 2,
+                    color: '#fff',
+                    rotate: -25,
+                    interval: 0,
                 }
                 },
                 yAxis: [
@@ -46,6 +46,7 @@ export default {
                             }
                         },
                         axisLabel: {
+                            color: '#fff',
                             formatter: '{value}'
                         },
                         scale:true
@@ -55,7 +56,7 @@ export default {
                     {
                         type: 'slider',
                         show: true,
-                        start: 50,
+                        start: 90,
                         end: 100,
                         handleSize: 8
                     },
@@ -90,7 +91,9 @@ export default {
                 },
                 yAxis:{
                     legend: {
-                        data: ['中国', '印度', '德国', '日本', '欧盟', '美国']
+                        data: ['中国', '印度', '德国', '日本', '欧盟', '美国'],
+                        type:'scroll',
+                        itemHeight:1,
                     },
                 },
                 series: [
@@ -98,32 +101,44 @@ export default {
                         name: '中国',
                         type: 'line',
                         yAxisIndex: 0,
-                        data: this.allData.中国.map(item => item.total_vaccinations / 10000),
+                        data: this.allData.中国.map(item => (item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     },
                     {
                         name: '印度',
                         type: 'line',
-                        data: this.allData.印度.map(item => item.total_vaccinations / 10000)
+                        data: this.allData.印度.map(item =>(item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     },
                     {
                         name: '德国',
                         type: 'line',
-                        data: this.allData.德国.map(item => item.total_vaccinations / 10000)
+                        data: this.allData.德国.map(item => (item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     },
                     {
                         name: '日本',
                         type: 'line',
-                        data: this.allData.日本.map(item => item.total_vaccinations / 10000)
+                        data: this.allData.日本.map(item => (item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     },
                     {
                         name: '欧盟',
                         type: 'line',
-                        data: this.allData.欧盟.map(item => item.total_vaccinations / 10000)
+                        data: this.allData.欧盟.map(item => (item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     },
                     {
                         name: '美国',
                         type: 'line',
-                        data: this.allData.美国.map(item => item.total_vaccinations / 10000)
+                        data: this.allData.美国.map(item => (item.total_vaccinations / 10000).toFixed(1)),
+                        stack: 'Total',
+                        areaStyle: {},
                     }
                 ], 
             }
