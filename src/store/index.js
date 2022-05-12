@@ -20,6 +20,8 @@ const state = {
 	baseIsOk:false,
 	mainInformation:null,
 	mainIsOk:false,
+	vaccineInformation:null,
+	vaccineIsOk:false,
 }
 const getters = {
 	

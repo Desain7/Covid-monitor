@@ -6,6 +6,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import * as echarts from 'echarts';
+import 'echarts-wordcloud';
 import VueRouter from 'vue-router'
 import scroll from 'vue-seamless-scroll'
 

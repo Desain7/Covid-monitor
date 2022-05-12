@@ -11,8 +11,9 @@
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-60">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">全国新增确诊</div>
-              <chinaConfirmLine></chinaConfirmLine>
+							<div class="title">全国疫情形势</div>
+              
+              <multiplyCondition></multiplyCondition>
 						</div>
 					</div>
 				</div>
@@ -44,8 +45,8 @@
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-45">
 						<div class="xpanel xpanel-r-b">
-							<div class="title">全国疫情形势</div>
-              <multiplyCondition></multiplyCondition>
+							<div class="title">全国新增确诊</div>
+              <chinaConfirmLine></chinaConfirmLine>
 						</div>
 					</div>
 				</div>

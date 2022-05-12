@@ -3,23 +3,23 @@
         <header class="header left">
             <div class="left nav">
                 <ul>
-                    <li><i class="nav_1"></i>
+                    <li>
                         <div class="china" >
-                            <router-link to="/china">
+                            <router-link to="/china" active-class='ativeRouter'>
                                 <span>中国</span>
                             </router-link>
                         </div> 
                     </li>
-                    <li><i class="nav_2"></i>           
+                    <li>        
                         <div class="oversea">
-                            <router-link to="/oversea">
+                            <router-link to="/oversea" active-class='ativeRouter'>
                                 <span>世界</span>
                             </router-link>
                         </div> 
                     </li>
-                    <li><i class="nav_3"></i>           
+                    <li>       
                         <div class="vaccine">
-                            <router-link to="/vaccine">
+                            <router-link to="/vaccine" active-class='ativeRouter'>
                                 <span>疫苗</span>
                             </router-link>
                         </div> 

@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import theme from '../../assets/confirm.json';
 
 export default {
@@ -27,11 +26,6 @@ export default {
             this.$echarts.registerTheme("theme", theme);
             this.chartInstance = this.$echarts.init(document.querySelector('.vaccineCondition'), 'theme');
             let initOption = {
-                title:{
-                    show:true,
-                    text:'全球疫苗接种情况'
-
-                },
                 xAxis: {
                 type: 'category',
                 axisLabel: {
@@ -85,16 +79,14 @@ export default {
             };
            this.chartInstance.setOption(initOption);
         },
-        async getData(){
-            await axios.get('http://localhost:8080/vaccine-data//v1/automation/modules/list?modules=VaccineSituationData').then(
-                response =>{
-                    console.log('1111',response.data.data.VaccineSituationData);
-                    response.data.data.VaccineSituationData.forEach(item => {
-                        this.totalVaccinations.push(item.total_vaccinations);
-                        this.countries.push(item.country);
-                    });
-                }
-            )
+        getData(){
+
+            this.$store.state.vaccineInformation.forEach(item => {
+                this.totalVaccinations.push(item.total_vaccinations);
+                this.countries.push(item.country);
+            });
+            
+            
             this.updateChart()
         },
         updateChart() {

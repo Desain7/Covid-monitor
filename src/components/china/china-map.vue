@@ -45,7 +45,24 @@ export default {
                             show: true, // 展示标签
                             backgroundColor:'rgb(222,222,222)',
                             borderRadius:5,
-                    },
+                        },
+                        itemStyle: {
+                            normal: {
+                                // 未选中状态
+                                color: "rgb(18,35,92)",
+                                shadowColor: "#d4dfe9",
+                                borderColor: "rgb(60,63,65)",
+                                borderWidth: 1,
+                                shadowBlur: 1,
+                                // shadowOffsetX: -5,
+                                // shadowOffsetY: 10,
+                            },
+                            emphasis: {
+                                // 选中样式
+                                color: "rgb(42,184,255)", // 地图颜色
+                                borderColor: "rgb(255, 255, 255)", // 边框颜色
+                            },
+                        },
                     zoom: 1, // 设置初始化的缩放比例
                     },
                     scaleLimit: {
@@ -66,6 +83,7 @@ export default {
                         {min: 100, max: 499},
                         {min: 10, max: 99},
                         {min: 1, max: 9,color:'rgb(253,235,207)'},
+                        {min: 0, max: 0,color:'rgb(255,255,255)'},
                     ]
                     },
                     select:false,

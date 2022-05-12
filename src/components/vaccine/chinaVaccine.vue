@@ -1,20 +1,17 @@
 <template>
-    <div class="confirmLine" style="width: 100%;height: 100%; display: inline-block;" ref="chinaConfirmLine"></div>
+    <div class="chinaVaccine" style="width: 100%;height: 100%; display: inline-block;" ref="chinaVaccine"></div>
 </template>
 
 <script>
 import axios from 'axios';
-import theme from '../../assets/confirm.json';
 
 export default {
     data() {
         return {
             chartInstance:null,
             date:[],
-            confirm:[],
-            heal:[],
-            dead:[],
-            input:[],
+            vaccined:[],
+            perHundred:[],
         }
     },
     mounted() {
@@ -27,8 +24,8 @@ export default {
     },
     methods: {
         initChart() {
-            this.$echarts.registerTheme("theme", theme);
-            this.chartInstance = this.$echarts.init(document.querySelector('.confirmLine'), 'theme');
+            this.$echarts.registerTheme("theme");
+            this.chartInstance = this.$echarts.init(this.$refs.chinaVaccine, 'theme');
             let initOption = {
                 xAxis: {
                 type: 'category',
@@ -38,15 +35,54 @@ export default {
                     interval: 2,
                 }
                 },
-                yAxis: {
-                    type: 'value'
-                },
+                yAxis: [
+                     {
+                        type: 'value',
+                        name: '累计接种剂次/万人',
+                        position: 'left',
+                        alignTicks: true,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                            // color: colors[0]
+                        
+                            }
+                        },
+                        scale:true,
+                    },
+                    {
+                        type: 'value',
+                        name: '每百人接种',
+                        position: 'right',
+                        alignTicks: true,
+                        offset: 20,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                            // color: colors[1]
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value}'
+                        },
+                        scale:true
+                    },
+                ],
                 legend: {
-                    data: ['新增确诊', '新增境外输入']
+                    data: ['累计接种', '每百人接种']
                 },
                 series: [
                     {
-                    type: 'line'
+                        name: '累计接种',
+                        type: 'bar',
+                        yAxisIndex: 0,
+                        data: this.perHundred
+                    },
+                    {
+                        name: '每百人接种',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: this.perHundred
                     }
                 ], 
                 dataZoom: [
@@ -62,17 +98,6 @@ export default {
                         start: 50,
                         end: 100
                     },
-                    {
-                        type: 'slider',
-                        show: true,
-                        yAxisIndex: 0,
-                        filterMode: 'empty',
-                        width: 12,
-                        height: '70%',
-                        handleSize: 8,
-                        showDataShadow: false,
-                        left: '93%'
-                    }
                 ],
                 tooltip: {
                     trigger: 'axis',
@@ -80,30 +105,17 @@ export default {
                     type: 'line'
                     },
                 },
-                color:{
-                    type: 'linear',
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [{
-                        offset: 0, color: 'rgb(255,128,128)' // 0% 处的颜色
-                    }, {
-                        offset: 1, color: 'rgb(255,0,0)' // 100% 处的颜色
-                    }],
-                    global: false // 缺省为 false
-                }
             };
            this.chartInstance.setOption(initOption);
         },
         async getData(){
-            await axios.get('http://localhost:8080/covid-data/list-total').then(
+            await axios.get('http://localhost:8080/vaccine-data/v1/automation/modules/list?modules=ChinaVaccineTrendData').then(
                 response =>{
                     console.log('1111',response.data);
-                    response.data.data.chinaDayList.forEach(item => {
+                    response.data.data.ChinaVaccineTrendData.forEach(item => {
                         this.date.push(item.date);
-                        this.confirm.push(item.today.confirm);
-                        this.input.push(item.today.input);
+                        this.vaccined.push(item.total_vaccinations / 10000);
+                        this.perHundred.push(item.total_vaccinations_per_hundred);
                     });
                 }
             )
@@ -115,38 +127,31 @@ export default {
                 type: 'category',
                 data: this.date,
                 },
-                yAxis: {
-                    type: 'value'
-                },
                 series:[
                     {
-                    name: '新增确诊',
+                    name: '累计接种',
                     type: 'line',
                     emphasis: {
                         focus: 'series'
                     },
-                    areaStyle: {},
-                    data: this.confirm,
-                    color: 'rgb(255,128,128)',
-                    smooth: true,
+                    data: this.vaccined,
+                    color: 'rgb(44,91,142)'
                     },
                     {
-                    name: '新增境外输入',
+                    name: '每百人接种',
                     type: 'line',
                     emphasis: {
                         focus: 'series'
                     },
-                    areaStyle: {},
-                    data: this.input,
-                    color: 'rgb(71,109,160)',
-                    smooth: true,
+                    data: this.perHundred,
+                    color: 'rgb(96,187,252)'
                     }
                 ], 
             }
             this.chartInstance.setOption(dataOption);
         },
         screenAdapter () {
-            this.titleFontSize = this.$refs.chinaConfirmLine.offsetWidth / 100 * 3.6
+            this.titleFontSize = this.$refs.chinaVaccine.offsetWidth / 100 * 3.6
             const adapterOption = {
                 title: {
                 textStyle: {

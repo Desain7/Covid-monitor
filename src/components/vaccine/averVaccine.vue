@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 import theme from '../../assets/confirm.json';
 
 export default {
@@ -27,11 +27,6 @@ export default {
             this.$echarts.registerTheme("theme", theme);
             this.chartInstance = this.$echarts.init(document.querySelector('.averVaccine'), 'theme');
             let initOption = {
-                title:{
-                    show:true,
-                    text:'各国人均疫苗接种'
-
-                },
                 xAxis: {
                 type: 'category',
                 axisLabel: {
@@ -86,15 +81,10 @@ export default {
            this.chartInstance.setOption(initOption);
         },
         async getData(){
-            await axios.get('http://localhost:8080/vaccine-data//v1/automation/modules/list?modules=VaccineSituationData').then(
-                response =>{
-                    console.log('1111',response.data.data.VaccineSituationData);
-                    response.data.data.VaccineSituationData.forEach(item => {
-                        this.totalVaccinationsPerHundred.push((item.total_vaccinations_per_hundred / 100).toFixed(2));
-                        this.countries.push(item.country);
-                    });
-                }
-            )
+            this.$store.state.vaccineInformation.forEach(item => {
+                this.totalVaccinationsPerHundred.push((item.total_vaccinations_per_hundred / 100).toFixed(2));
+                this.countries.push(item.country);
+            });
             this.updateChart()
         },
         updateChart() {

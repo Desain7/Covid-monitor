@@ -143,33 +143,9 @@ a:hover{
 .li_ul li a{
     color: #ffffff;
     font-size: 13px;
+    text-decoration: none;
 }
 
-.nav_1{
-     background: url("../img/nav_1.png");
- }
-.nav_2{
-    background-image: url("../img/nav_2.png");
-}
-.nav_3{
-    background-image: url("../img/nav_3.png");
-
-}
-.nav_4{
-    background-image: url("../img/nav_4.png");
-}
-.nav_5{
-    background-image: url("../img/nav_5.png");
-}
-.nav_6{
-    background-image: url("../img/nav_6.png");
-}
-.nav_7{
-    background-image: url("../img/nav_7.png");
-}
-.nav_8{
-    background-image: url("../img/nav_9.png");
-}
 .nav_active{
     border-bottom: 4px solid #4b8df8;
     box-shadow: -10px 0px 15px #034c6a inset, /*å·¦è¾¹é˜´å½±*/
@@ -178,6 +154,14 @@ a:hover{
     0px 10px 15px #034c6a inset;
 
     box-sizing: border-box;
+}
+.left-nav ul{
+    z-index: 999;
+}
+
+.ativeRouter{
+    color: #e8f7fe;
+    font-size: 30px;
 }
 
 

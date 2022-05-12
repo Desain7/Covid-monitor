@@ -11,8 +11,9 @@
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-60">
 						<div class="xpanel xpanel-l-b">
-							<div class="title">现存确诊Top10</div>
-              <worldCurrentRank v-if="$store.state.mainIsOk"></worldCurrentRank>
+							<div class="title">世界疫情形势</div>
+              
+              <worldSituation v-if="$store.state.mainIsOk"></worldSituation>
 						</div>
 					</div>
 				</div>
@@ -32,8 +33,8 @@
 				<div class="col col-r">
 					<div class="xpanel-wrapper xpanel-wrapper-25">
 						<div class="xpanel xpanel-r-t">
-							<div class="title"></div>
-              
+							<div class="title">各大洲现有确诊</div>
+                  <continentSituation v-if="$store.state.mainIsOk"></continentSituation>
 						</div>
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-30">
@@ -44,8 +45,8 @@
 					</div>
 					<div class="xpanel-wrapper xpanel-wrapper-45">
 						<div class="xpanel xpanel-r-b">
-							<div class="title">世界疫情形势</div>
-              <worldSituation v-if="$store.state.mainIsOk"></worldSituation>
+							<div class="title">现存确诊Top10</div>
+              <worldCurrentRank v-if="$store.state.mainIsOk"></worldCurrentRank>
 						</div>
 					</div>
 				</div>
@@ -63,6 +64,7 @@ import worldCurrentRank from '../components/oversea/world-current-rank.vue';
 import showInformation from '../components/oversea/showInformation.vue';
 import worldConfirm from '../components/oversea/worldConfirm.vue';
 import worldSituation from '../components/oversea/worldSituation.vue';
+import continentSituation from '../components/oversea/continentSituation.vue';
 
 export default {
   name:'globalData',
@@ -116,7 +118,8 @@ export default {
     worldCurrentRank,
     showInformation,
     worldConfirm,
-    worldSituation
+    worldSituation,
+    continentSituation
   },
   mounted(){
     this.getData()

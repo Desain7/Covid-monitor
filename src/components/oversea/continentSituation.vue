@@ -1,10 +1,9 @@
 <template>
-    <div class='com-chart' style="width: 80%;height: 75%; display: inline-block;" ref='patientType'></div>
+    <div class='continentSituation' style="width: 75%;height: 75%; display: inline-block;" ref='continentSituation'></div>
 </template>
 
 <script>
 
-import axios from 'axios';
 
 export default {
   data () {
@@ -41,67 +40,72 @@ export default {
   },
   methods: {
     initChart () {
-      this.chartInstance = this.$echarts.init(this.$refs.patientType)
+      this.chartInstance = this.$echarts.init(this.$refs.continentSituation)
       const initOption = {
-        legend: {
-          top: '15%',
-          icon: 'circle',
-          orient: 'vertical',
-          left: 'right',
-        },
-        tooltip: {
-          show: true,
-        },
-        series: [
-          {
-            type: 'pie',
-            radius : '35%',
-            center: ['50%', '60%'],
-            emphasis: {
-              label: {
-                show: true
-              },
-              emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+            tooltip: {
+            trigger: 'item'
+            },
+            legend: {
+                top: '15%',
+                icon: 'circle',
+                orient: 'vertical',
+                left: 'right',
+            },
+            series: [
+                {
+                name: '现有确诊',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
                 },
-              labelLine: {
-                show: false
-              }
-            }
-          }
-        ]
+                emphasis: {
+                    label: {
+                    show: true,
+                    fontSize: '40',
+                    fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                }
+            ]
       }
       this.chartInstance.setOption(initOption)
     },
     async getData () {
       // 获取服务器的数据, 对this.allData进行赋值之后, 调用updateChart方法更新图表
-      await axios.get('http://api.tianapi.com/ncov/index?key=54690b563dc6b1aca2009da3fc100993').then(
-                response => {
-                   this.patientData = response.data.newslist[0].desc
-                }
-            )
-      console.log(this.patientData)
-      this.updateChart()
+        this.patientData = this.$store.state.mainInformation.globalList
+        console.log(this.patientData)
+        this.updateChart()
     },
     updateChart () {
       // 处理图表需要的数据
-      const legendData = ['现存确诊', '现存无症状', '治愈', '死亡']
+      const legendData = ['亚洲', '欧洲', '非洲', '大洋洲', '北美洲', '南美洲']
       const seriesData = [{
-        name: '现存确诊',
-        value: this.patientData.currentConfirmedCount,
+        name: '亚洲',
+        value: this.patientData[0].curConfirm,
         
       }, {
-        name: '现存无症状',
-        value: this.patientData.suspectedCount
+        name: '欧洲',
+        value: this.patientData[1].curConfirm,
       }, {
-        name: '治愈',
-        value: this.patientData.curedCount
+        name: '非洲',
+        value: this.patientData[2].curConfirm,
       }, {
-        name: '死亡',
-        value: this.patientData.deadCount
-      }]
+        name: '大洋洲',
+        value: this.patientData[3].curConfirm,
+      }, {
+        name: '北美洲',
+        value: this.patientData[4].curConfirm,
+      }, {
+        name: '南美洲',
+        value: this.patientData[5].curConfirm,
+      }
+      ]
       const dataOption = {
         legend: {
           data: legendData
@@ -121,7 +125,7 @@ export default {
       this.chartInstance.setOption(dataOption)
     },
     screenAdapter () {
-      this.titleFontSize = this.$refs.patientType.offsetWidth / 100 * 3.6
+      this.titleFontSize = this.$refs.continentSituation.offsetWidth / 100 * 3.6
       const adapterOption = {
         title: {
           textStyle: {

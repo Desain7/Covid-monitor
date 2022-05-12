@@ -1,5 +1,5 @@
 <template>
-    <div class="globalMap" style="width: 100%;height: 90%; display: block;" ref="globalMap"></div>
+    <div class="vaccineMap" style="width: 100%;height: 90%; display: block;" ref="vaccineMap"></div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ import axios from 'axios';
 import {formatWorldMapToZH} from '../../utils/worldFormat.js';
 
 export default {
-    name: 'globalMap',
+    name: 'vaccineMap',
     data() {
         return {
             chartInstance:null,
@@ -34,8 +34,7 @@ export default {
                     console.log('请求失败！',error.message)
                 }
             )
-            this.chartInstance = this.$echarts.init(document.querySelector(".globalMap"))
-            console.log(111,this.chartInstance)
+            this.chartInstance = this.$echarts.init(this.$refs.vaccineMap)
             let initOption = {
                     geo: {
                         type: 'map',
@@ -47,7 +46,7 @@ export default {
                                 // 未选中状态
                                 color: "rgb(18,35,92)",
                                 shadowColor: "#d4dfe9",
-                                borderColor: "rgb(60,63,65)",
+                                borderColor: "rgb(40,176,247)",
                                 borderWidth: 1,
                                 shadowBlur: 1,
                                 // shadowOffsetX: -5,
@@ -67,16 +66,16 @@ export default {
                     visualMap: {
                     min: 0,
                     inRange: {
-                        color: ['white', 'red'] // 控制颜色渐变的范围
+                        color: ['white', 'rgb(44,91,142)'] // 控制颜色渐变的范围
                     },
                     continuous:{
                         show:true,
                     },
                     pieces: [
-                        {min: 1000000}, // 不指定 max，表示 max 为无限大（Infinity）。
-                        {min: 100000, max: 999999},
-                        {min: 10000, max: 99999},
-                        {min: 100, max: 9999},
+                        {min: 100000000}, // 不指定 max，表示 max 为无限大（Infinity）。
+                        {min: 10000000, max: 99999999},
+                        {min: 1000000, max: 9999999},
+                        {min: 10000, max: 999999},
                         {min: 1, max: 99,color:'rgb(253,235,207)'},
                     ]
                     },
@@ -86,25 +85,31 @@ export default {
             this.getData()
         },
         getData() {
-            this.allData = this.$store.state.mainInformation.caseOutsideList
-            console.log('allDataGlo',this.allData)
+            this.allData = this.$store.state.vaccineInformation;
+            
             this.updateChart()
         },
         updateChart() {
             // 处理图表需要的数据
             // 图例的数据
             const seriesArr = this.allData.map(item => {
+                if(item.country === '格陵兰'){
+                    return {
+                    name:'格陵兰岛', 
+                    value:item.total_vaccinations
+                } 
+                }
+                if(item.country === '蒙古'){
+                    return {
+                    name:'蒙古国', 
+                    value:item.total_vaccinations
+                }
+                }
                 return {
-                    name:item.area, 
-                    value:item.curConfirm
+                    name:item.country, 
+                    value:item.total_vaccinations
                 }    
             })
-            seriesArr.push(
-                {
-                    name:'中国',
-                    value:this.$store.state.mainInformation.summaryDataIn.curConfirm
-                }
-            )
             const dataOption = {
                 series: [{
                     type: 'map',
@@ -114,14 +119,13 @@ export default {
                 }],
                 tooltip: {
                         trigger: 'item',
-                        formatter: '{b}<br/>当前确诊人数:{c}'
+                        formatter: '{b}<br/>当前接种人数:{c}'
                     },
             }
-            console.log(123,this.chartInstance)
             this.chartInstance.setOption(dataOption)
         },
             screenAdapter () {
-                this.titleFontSize = this.$refs.globalMap.offsetWidth / 100 * 3.6
+                this.titleFontSize = this.$refs.vaccineMap.offsetWidth / 100 * 3.6
                 const adapterOption = {
                     title: {
                     textStyle: {
